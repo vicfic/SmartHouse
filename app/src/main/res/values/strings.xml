@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">APM-SmartHouse</string>
+
+
+    <!--- Actividad Rutinas -->
+    <string name="toolbar_routine_name">Rutinas</string>
+    <string-array name="context_menu_routine_list">
+        <item>Encender</item>
+        <item>Apagar</item>
+        <item>Configurar</item>
+    </string-array>
+
 </resources>
