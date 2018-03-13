@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">APM-SmartHouse</string>
+    <string name="usuario_o_email">Usuario o Email</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar">INICIAR</string>
+    <string name="iniciar_con_google">INICIAR CON GOOGLE</string>
+    <string name="iniciar_con_twitter">INICIAR CON TWITTER</string>
+    <string name="iniciar_con_facebook">INICIAR CON FACEBOOK</string>
+    <string name="icono_de_boton">icono de boton</string>
 </resources>
