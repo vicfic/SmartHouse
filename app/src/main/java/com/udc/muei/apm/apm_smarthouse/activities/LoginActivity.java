@@ -1,11 +1,13 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.udc.muei.apm.apm_smarthouse.Actividad_Inicial;
 import com.udc.muei.apm.apm_smarthouse.R;
 
 /**
@@ -28,5 +30,8 @@ public class LoginActivity extends AppCompatActivity{
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+
+        Intent intent = new Intent(this, Actividad_Inicial.class);
+        startActivity(intent);
     }
 }
