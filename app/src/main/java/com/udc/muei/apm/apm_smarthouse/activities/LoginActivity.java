@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.udc.muei.apm.apm_smarthouse.Actividad_Inicial;
 import com.udc.muei.apm.apm_smarthouse.R;
 
 /**
