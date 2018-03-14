@@ -10,4 +10,12 @@
         <item>Configurar</item>
     </string-array>
 
+
+    <!--- Actividad Permisos -->
+    <string name="toolbar_permisos_name">Permisos</string>
+    <string name="toolbar_permisos_name_error">Error Permisos</string>
+
+    <!-- Actividad Usuarios -->
+    <string name="toolbar_usuarios_name">Usuarios</string>
+
 </resources>

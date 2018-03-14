@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 
 
-public class RoutineAdapter extends ArrayAdapter<Routine> implements View.OnClickListener {
+public class RoutineAdapter extends ArrayAdapter<Routine> {
 
     private RoutineListClicksListeners routineListClicksListeners = null;
     private ArrayList<Routine> dataSet;
@@ -47,22 +47,6 @@ public class RoutineAdapter extends ArrayAdapter<Routine> implements View.OnClic
 
     public Routine getItem(int position){
         return dataSet.get(position);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        int position= (Integer)v.getTag();
-        Object object= getItem(position);
-        Routine rutina= (Routine) object;
-
-        switch (v.getId()){
-            case R.id.routine_switch_adapter:
-
-                //Crear intent para entrar en la actividad RoutineConfig
-
-                break;
-        }
     }
 
 

@@ -3,7 +3,7 @@ package com.udc.muei.apm.apm_smarthouse.activities;
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.PermisoAdapter;
 import com.udc.muei.apm.apm_smarthouse.adapters.PermisoAdapterRoot;
-import com.udc.muei.apm.apm_smarthouse.interfaces.PermisoListRootClickListeners;
+import com.udc.muei.apm.apm_smarthouse.interfaces.PermisoListRootClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.Permiso;
 import com.udc.muei.apm.apm_smarthouse.model.Usuario;
 import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
@@ -50,6 +50,7 @@ public class Permisos extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+            /**************************************************************************************/
             /* Aqui se haria la petición al servidor */
             Toast.makeText(getApplicationContext(),"Petición GET. Permisos para el usuario con ID:"+usuarioLight.getIdUsuarioDjango(),Toast.LENGTH_LONG).show();
 
@@ -71,6 +72,7 @@ public class Permisos extends AppCompatActivity {
             permisoArray.add(new Permiso(14,"rutinas", false));
             permisoArray.add(new Permiso(15,"calefacción", true));
             Usuario usuarioJuan = new Usuario(12, "Juan", false,  permisoArray);
+            /**************************************************************************************/
 
             /* Relleno de la lista*/
             permisoList =  findViewById(R.id.permiso_list);
@@ -79,7 +81,7 @@ public class Permisos extends AppCompatActivity {
                 permisoAdapter = new PermisoAdapter(permisoArray, getApplicationContext());
                 permisoList.setAdapter(permisoAdapter);
             }else {
-                permisoAdapterRoot = new PermisoAdapterRoot(permisoArray, getApplicationContext(), new PermisoListRootClickListeners() {
+                permisoAdapterRoot = new PermisoAdapterRoot(permisoArray, getApplicationContext(), new PermisoListRootClicksListeners() {
                     @Override
                     public void onCheckedBox(int position, boolean isChecked) {
                         Permiso permiso = (Permiso) permisoList.getItemAtPosition(position);
@@ -105,7 +107,7 @@ public class Permisos extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        Toast.makeText(getApplicationContext(),"Botón Back presionado " , Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Botón Back presionado" , Toast.LENGTH_SHORT).show();
         onBackPressed();
         return true;
     }

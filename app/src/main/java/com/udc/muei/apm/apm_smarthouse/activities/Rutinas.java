@@ -46,7 +46,7 @@ public class Rutinas extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /* Lista de rutinas */
-        routineList =(ListView)findViewById(R.id.routine_list);
+        routineList = findViewById(R.id.routine_list);
         routineArray= new ArrayList<>();
 
 
