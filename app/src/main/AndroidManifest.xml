@@ -19,6 +19,7 @@
         <activity android:name=".activities.Rutinas" />
         <activity android:name=".activities.Permisos" />
         <activity android:name=".activities.Usuarios"></activity>
+        <activity android:name=".activities.LoginActivity" />
     </application>
 
 </manifest>

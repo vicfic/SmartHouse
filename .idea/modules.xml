@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/APMSmartHouse.iml" filepath="$PROJECT_DIR$/APMSmartHouse.iml" />
+      <module fileurl="file://C:\Users\DavidPC\AndroidStudioProjects\SmartHouse\APMSmartHouse.iml" filepath="C:\Users\DavidPC\AndroidStudioProjects\SmartHouse\APMSmartHouse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartHouse.iml" filepath="$PROJECT_DIR$/SmartHouse.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
