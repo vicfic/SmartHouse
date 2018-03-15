@@ -2,6 +2,9 @@
     <string name="app_name">APM-SmartHouse</string>
 
 
+    <!--- Actividad Menu Principal -->
+    <string name="toolbar_menu_principal_name">Menú Principal</string>
+
     <!--- Actividad Rutinas -->
     <string name="toolbar_routine_name">Rutinas</string>
     <string-array name="context_menu_routine_list">
@@ -18,6 +21,7 @@
     <!-- Actividad Usuarios -->
     <string name="toolbar_usuarios_name">Usuarios</string>
 
+    <!-- ActividadLogin -->
     <string name="usuario_o_email">Usuario o Email</string>
     <string name="contrase_a">Contraseña</string>
     <string name="iniciar">INICIAR</string>
@@ -25,4 +29,22 @@
     <string name="iniciar_con_twitter">INICIAR CON TWITTER</string>
     <string name="iniciar_con_facebook">INICIAR CON FACEBOOK</string>
     <string name="icono_de_boton">icono de boton</string>
+
+    <!-- Actividad Favoritos -->
+    <string name="toolbar_favoritos_name">Favoritos</string>
+
+    <!-- Actividad Lugares -->
+    <string name="toolbar_lugares_name">Lugares</string>
+
+    <!-- Actividad Dispositivos Lugar -->
+    <string name="toolbar_dispositivos_lugar_name">Dispositivos</string>
+
+    <!-- Actividad Configuración Servidor -->
+    <string name="toolbar_configuracion_servidor_name">Configuración Servidor</string>
+    <string name="direccion_ip">Dirección IP</string>
+    <string name="puerto_servidor">Puerto</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+
+
 </resources>

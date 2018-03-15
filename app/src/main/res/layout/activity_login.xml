@@ -7,12 +7,12 @@
     tools:context="com.udc.muei.apm.apm_smarthouse.activities.LoginActivity">
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="380dp"
+        android:id="@+id/edittext_username"
+        android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="44dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/usuario_o_email"
         android:inputType="textPersonName"
@@ -21,27 +21,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="381dp"
+        android:id="@+id/edittext_password"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:ems="10"
         android:hint="@string/contrase_a"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_username" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="381dp"
-        android:layout_height="59dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/iniciar"
         android:textColor="#ffffff"
@@ -49,31 +49,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
-        tools:onClick="sendMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_password" />
+
+    <View
+        android:id="@+id/view_botones"
+        style="@style/Divider"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="381dp"
+        android:id="@+id/button_facebook"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/iniciar_con_google"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/iniciar_con_facebook"
         android:textColor="#ffffff"
-        android:background="#8d98f2"
+        android:background="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:onClick="sendMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/view_botones" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="381dp"
-        android:layout_height="59dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
+        android:id="@+id/button_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
         android:text="@string/iniciar_con_twitter"
         android:textColor="#ffffff"
@@ -81,36 +91,29 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        tools:onClick="sendMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/button_facebook" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="381dp"
-        android:layout_height="59dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/iniciar_con_facebook"
+        android:id="@+id/button_google"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/iniciar_con_google"
         android:textColor="#ffffff"
-        android:background="@color/colorPrimary"
+        android:background="#8d98f2"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        tools:onClick="sendMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/button_twitter" />
 
-    <View
-        android:id="@+id/view"
-        style="@style/Divider"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+
+
+
+
+
 
     <ImageView
         android:id="@+id/imageView3"
@@ -121,9 +124,9 @@
         android:layout_marginTop="8dp"
         android:elevation="2dp"
         android:tint="#78909c"
-        app:layout_constraintBottom_toBottomOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toBottomOf="@+id/button_google"
+        app:layout_constraintStart_toStartOf="@+id/button_google"
+        app:layout_constraintTop_toTopOf="@+id/button_google"
         app:srcCompat="@drawable/google"
         android:contentDescription="@string/icono_de_boton" />
 
@@ -136,9 +139,9 @@
         android:layout_marginTop="8dp"
         android:elevation="2dp"
         android:tint="#78909c"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toBottomOf="@+id/button_twitter"
+        app:layout_constraintStart_toStartOf="@+id/button_twitter"
+        app:layout_constraintTop_toTopOf="@+id/button_twitter"
         app:srcCompat="@drawable/twitter"
         android:contentDescription="@string/icono_de_boton" />
 
@@ -151,9 +154,9 @@
         android:layout_marginTop="8dp"
         android:elevation="2dp"
         android:tint="#78909c"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/button_facebook"
+        app:layout_constraintStart_toStartOf="@+id/button_facebook"
+        app:layout_constraintTop_toTopOf="@+id/button_facebook"
         app:srcCompat="@drawable/facebookbox"
         android:contentDescription="@string/icono_de_boton" />
 

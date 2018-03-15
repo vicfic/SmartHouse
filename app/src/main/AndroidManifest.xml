@@ -9,18 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.Actividad_Inicial">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.MenuPrincipal" />
         <activity android:name=".activities.Favoritos" />
         <activity android:name=".activities.Rutinas" />
         <activity android:name=".activities.Permisos" />
-        <activity android:name=".activities.Usuarios"></activity>
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.Usuarios" />
+        <activity android:name=".activities.Lugares" />
+        <activity android:name=".activities.DispositivosLugar" />
+        <activity android:name=".activities.ConfiguracionServidor"></activity>
     </application>
 
 </manifest>

@@ -7,16 +7,14 @@ package com.udc.muei.apm.apm_smarthouse.model;
 public class Device {
 
     private String name;
-    private int type;
-    private boolean favorite;
+    private TipoDispositivo type;
+    private boolean isFavorite;
 
-    public static int DEVICE_TYPE_LIGHTBULB = 1;
-    public static int DEVICE_TYPE_STOVE = 2;
 
-    public Device(String name, int type, boolean favorite) {
+    public Device(String name, TipoDispositivo type, boolean favorite) {
         this.name = name;
         this.type = type;
-        this.favorite = favorite;
+        this.isFavorite = favorite;
     }
 
     public String getName() {
@@ -27,19 +25,19 @@ public class Device {
         this.name = name;
     }
 
-    public int getType() {
+    public TipoDispositivo getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(TipoDispositivo type) {
         this.type = type;
     }
 
     public boolean isFavorite() {
-        return favorite;
+        return isFavorite;
     }
 
     public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
+        this.isFavorite = favorite;
     }
 }
