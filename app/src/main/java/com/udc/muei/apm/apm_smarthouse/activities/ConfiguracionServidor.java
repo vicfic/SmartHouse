@@ -26,7 +26,7 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
 
         /* Toolbar de la actividad */
         Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.configuracion_toolbar);
-        toolbarRoutine.setTitle(getString(R.string.toolbar_usuarios_name));
+        toolbarRoutine.setTitle(getString(R.string.toolbar_configuracion_servidor_name));
         toolbarRoutine.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbarRoutine);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

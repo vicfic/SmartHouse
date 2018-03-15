@@ -9,6 +9,7 @@ public class Device {
     private String name;
     private TipoDispositivo type;
     private boolean isFavorite;
+    //Anhadir ID DJANGO
 
 
     public Device(String name, TipoDispositivo type, boolean favorite) {
