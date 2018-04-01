@@ -1,16 +1,19 @@
-package com.udc.muei.apm.apm_smarthouse.activities;
+package com.udc.muei.apm.apm_smarthouse.fragments;
 
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -25,28 +28,17 @@ import com.udc.muei.apm.apm_smarthouse.model.Routine;
 
 import java.util.ArrayList;
 
-public class Rutinas extends AppCompatActivity {
+public class Rutinas extends android.support.v4.app.ListFragment implements AdapterView.OnItemClickListener {
 
     private static final String RUTINAS_TAG = "ACTIVIDAD RUTINAS";
-    private ListView routineList;
     private static RoutineAdapter routineAdapter;
     private ArrayList<Routine> routineArray;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rutinas);
-
-        /* Toolbar de la actividad */
-        Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.routine_toolbar);
-        toolbarRoutine.setTitle(getString(R.string.toolbar_routine_name));
-        toolbarRoutine.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbarRoutine);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /* Lista de rutinas */
-        routineList = findViewById(R.id.routine_list);
         routineArray= new ArrayList<>();
 
 
@@ -59,33 +51,35 @@ public class Rutinas extends AppCompatActivity {
         routineArray.add(new Routine("Desumificador", true));
         /******************************************************************************************/
 
-        routineAdapter= new RoutineAdapter(routineArray, getApplicationContext(), new RoutineListClicksListeners() {
+        routineAdapter= new RoutineAdapter(routineArray, getContext(), new RoutineListClicksListeners() {
             @Override
             public void onSettingClick(int position) {
-                Routine routine = (Routine) routineList.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),"Rutina "+ routine.getName() +". Botón configuración pulsado" , Toast.LENGTH_SHORT).show();
+                Routine routine = (Routine) getListView().getItemAtPosition(position);
+                Toast.makeText(getContext(),"Rutina "+ routine.getName() +". Botón configuración pulsado" , Toast.LENGTH_SHORT).show();
                 Log.d(RUTINAS_TAG, "Rutina "+ routine.getName() +". Botón configuración pulsado");
             }
 
             @Override
             public void onSwitchClick(int position, boolean isChecked) {
-                Routine routine = (Routine) routineList.getItemAtPosition(position);
+                Routine routine = (Routine) getListView().getItemAtPosition(position);
                 if (routine.getState() != isChecked) {
                     routine.setState(isChecked);
-                    Toast.makeText(getApplicationContext(),"Rutina "+ routine.getName() +" "+ (routine.getState()?"activada":"desactivada") , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Rutina "+ routine.getName() +" "+ (routine.getState()?"activada":"desactivada") , Toast.LENGTH_SHORT).show();
                     Log.d(RUTINAS_TAG, "Rutina "+ routine.getName() +" "+ (routine.getState()?"activada":"desactivada") );
                 }
             }
         });
-        routineList.setAdapter(routineAdapter);
-    }
 
+    }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        Toast.makeText(getApplicationContext(),"Botón Back presionado " , Toast.LENGTH_SHORT).show();
-        onBackPressed();
-        return true;
+    public void onStart() {
+        super.onStart();
+        setListAdapter(routineAdapter);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }

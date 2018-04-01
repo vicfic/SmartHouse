@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView username;
     TextView password;
 
+    ImageButton button_server_settings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -37,13 +40,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_facebook = findViewById(R.id.button_facebook);
         button_google = findViewById(R.id.button_google);
         button_twitter = findViewById(R.id.button_twitter);
-
+        button_server_settings = findViewById(R.id.server_settings_button);
 
         button_login.setOnClickListener(this);
         button_facebook.setOnClickListener(this);
         button_twitter.setOnClickListener(this);
         button_google.setOnClickListener(this);
-
+        button_server_settings.setOnClickListener(this);
     }
 
     @Override
@@ -64,7 +67,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.button_google:
                 loginGoogle();
                 break;
+            case R.id.server_settings_button:
+                returnToServerSettings();
+                break;
         }
+    }
+
+    private void returnToServerSettings(){
+        Intent intent = new Intent(this, ConfiguracionServidor.class);
+        startActivity(intent);
     }
 
     private void makeIntent(){

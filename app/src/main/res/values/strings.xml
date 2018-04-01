@@ -4,6 +4,11 @@
 
     <!--- Actividad Menu Principal -->
     <string name="toolbar_menu_principal_name">Menú Principal</string>
+    <string name="action_favorite">Favoritos</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
 
     <!--- Actividad Rutinas -->
     <string name="toolbar_routine_name">Rutinas</string>

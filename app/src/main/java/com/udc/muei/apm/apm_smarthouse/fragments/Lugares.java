@@ -1,51 +1,47 @@
-package com.udc.muei.apm.apm_smarthouse.activities;
+package com.udc.muei.apm.apm_smarthouse.fragments;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.activities.DispositivosLugar;
 import com.udc.muei.apm.apm_smarthouse.adapters.LugarAdapter;
 import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.interfaces.LugarListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.Lugar;
 import com.udc.muei.apm.apm_smarthouse.model.Routine;
 import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
-
+import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Lugares extends AppCompatActivity {
+public class Lugares extends android.support.v4.app.ListFragment implements AdapterView.OnItemClickListener {
 
     private static final String LUGARES_TAG = "ACTIVIDAD LUGARES";
-    private ListView lugaresList;
     private static LugarAdapter lugaresAdapter;
     private ArrayList<Lugar> lugarArray;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lugares);
-
-        /* Toolbar de la actividad */
-        Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.lugares_toolbar);
-        toolbarRoutine.setTitle(getString(R.string.toolbar_lugares_name));
-        toolbarRoutine.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbarRoutine);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /* Lista de rutinas */
-        lugaresList = findViewById(R.id.lugares_list);
         lugarArray = new ArrayList<>();
 
 
         /******************************************************************************************/
         /* Aqui se haria la petición al servidor */
-        Toast.makeText(getApplicationContext(),"Petición GET. Lugares disponibles en la casa:",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"Petición GET. Lugares disponibles en la casa:",Toast.LENGTH_LONG).show();
 
         /* Esta información está introducida manualmente de momento, a posterior, estos datos serán
         enviados por el servidor */
@@ -60,28 +56,29 @@ public class Lugares extends AppCompatActivity {
         lugarArray.add(new Lugar("Jardín", 8));
         /******************************************************************************************/
 
-        lugaresAdapter = new LugarAdapter(lugarArray, getApplicationContext(), new LugarListClicksListeners() {
+        lugaresAdapter = new LugarAdapter(lugarArray, getContext(), new LugarListClicksListeners() {
             @Override
             public void onButtonLugaresClick(int position) {
-                Lugar lugar = (Lugar) lugaresList.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),"Lugar "+ lugar.getName() +" seleccionado",Toast.LENGTH_LONG).show();
+                Lugar lugar = (Lugar) getListView().getItemAtPosition(position);
+                Toast.makeText(getContext(),"Lugar "+ lugar.getName() +" seleccionado",Toast.LENGTH_LONG).show();
 
-                Intent i = new Intent(getApplicationContext(), DispositivosLugar.class);
+                Intent i = new Intent(getContext(), DispositivosLugar.class);
                 i.putExtra("lugar", lugar);
                 startActivity(i);
             }
         });
 
-
-
-        lugaresList.setAdapter(lugaresAdapter);
     }
-
 
     @Override
-    public boolean onSupportNavigateUp() {
-        Toast.makeText(getApplicationContext(),"Botón Back presionado " , Toast.LENGTH_SHORT).show();
-        onBackPressed();
-        return true;
+    public void onStart() {
+        super.onStart();
+        setListAdapter(lugaresAdapter);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
 }

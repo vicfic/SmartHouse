@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.udc.muei.apm.apm_smarthouse.activities.LoginActivity">
 
+    <ImageButton
+        android:id="@+id/server_settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="4dp"
+        android:background="#00ffffff"
+        android:src="@drawable/ic_settings_black_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/edittext_username"
         android:layout_width="match_parent"

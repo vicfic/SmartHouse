@@ -16,14 +16,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MenuPrincipal" />
-        <activity android:name=".activities.Favoritos" />
-        <activity android:name=".activities.Rutinas" />
+
+        <fragment android:name=".activities.Favoritos" />
+        <fragment android:name=".activities.Rutinas" />
+        <fragment android:name=".activities.Lugares" />
+
         <activity android:name=".activities.Permisos" />
         <activity android:name=".activities.Usuarios" />
-        <activity android:name=".activities.Lugares" />
+        <activity android:name=".activities.MenuPrincipal" />
         <activity android:name=".activities.DispositivosLugar" />
-        <activity android:name=".activities.ConfiguracionServidor"></activity>
+        <activity android:name=".activities.ConfiguracionServidor"/>
+
     </application>
 
 </manifest>
