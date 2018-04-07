@@ -2,6 +2,7 @@ package com.udc.muei.apm.apm_smarthouse.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.udc.muei.apm.apm_smarthouse.R;
 
 /**
  * Created by DavidPC on 14/03/2018.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button button_login;
     Button button_twitter;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -47,13 +49,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_twitter.setOnClickListener(this);
         button_google.setOnClickListener(this);
         button_server_settings.setOnClickListener(this);
+
+        //  Verifica si el gps está activado
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+
+        try {
+            gps_enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del GPS_PROVIDER", Toast.LENGTH_LONG).show();
+        }
+        try {
+            network_enabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del NETWORK_PROVIDER", Toast.LENGTH_LONG).show();
+        }
+
+        if (!gps_enabled && !network_enabled) {
+            Toast.makeText(getApplicationContext(), "El GPS está desactivado", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_login:
-                if ((username.getText().length() == 0) ||(password.getText().length() == 0))
+                if ((username.getText().length() == 0) || (password.getText().length() == 0))
                     Toast.makeText(getApplicationContext(), "Introduzca usuario y contraseña", Toast.LENGTH_LONG).show();
                 else
                     loginUsernamePassword(username.getText().toString(), password.getText().toString());
@@ -73,32 +96,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void returnToServerSettings(){
+    private void returnToServerSettings() {
         Intent intent = new Intent(this, ConfiguracionServidor.class);
         startActivity(intent);
     }
 
-    private void makeIntent(){
+    private void makeIntent() {
         Intent intent = new Intent(this, MenuPrincipal.class);
         startActivity(intent);
     }
 
-    private void loginUsernamePassword(String username, String password){
-        Toast.makeText(getApplicationContext(), "Logeando con usuario: "+ username+" y contraseña: "+password,Toast.LENGTH_LONG).show();
+    private void loginUsernamePassword(String username, String password) {
+        Toast.makeText(getApplicationContext(), "Logeando con usuario: " + username + " y contraseña: " + password, Toast.LENGTH_LONG).show();
         makeIntent();
     }
 
-    private void loginFacebook(){
+    private void loginFacebook() {
         Toast.makeText(getApplicationContext(), "Proceso de login con FACEBOOK", Toast.LENGTH_LONG).show();
         makeIntent();
     }
 
-    private void loginTwitter(){
+    private void loginTwitter() {
         Toast.makeText(getApplicationContext(), "Proceso de login con TWITTER", Toast.LENGTH_LONG).show();
         makeIntent();
     }
 
-    private void loginGoogle(){
+    private void loginGoogle() {
         Toast.makeText(getApplicationContext(), "Proceso de login con GOOGLE", Toast.LENGTH_LONG).show();
         makeIntent();
     }

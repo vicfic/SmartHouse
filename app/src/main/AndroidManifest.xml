@@ -25,8 +25,9 @@
         <activity android:name=".activities.Usuarios" />
         <activity android:name=".activities.MenuPrincipal" />
         <activity android:name=".activities.DispositivosLugar" />
-        <activity android:name=".activities.ConfiguracionServidor"/>
+        <activity android:name=".activities.ConfiguracionServidor" />
 
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
