@@ -4,14 +4,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,7 +75,7 @@ public class MenuPrincipal extends AppCompatActivity {
         fragmentFav.setText("Favoritos");
         fragmentFav.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 // Create new fragment and transaction
                 Favoritos newFragment = new Favoritos();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newFragment).addToBackStack(null).commit();
@@ -82,7 +86,7 @@ public class MenuPrincipal extends AppCompatActivity {
         fragmentPlaces.setText("Lugares");
         fragmentPlaces.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 // Create new fragment and transaction
                 Lugares newFragment = new Lugares();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newFragment).addToBackStack(null).commit();
@@ -93,7 +97,7 @@ public class MenuPrincipal extends AppCompatActivity {
         fragmentRut.setText("Rutinas");
         fragmentRut.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 // Create new fragment and transaction
                 Rutinas newFragment = new Rutinas();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newFragment).addToBackStack(null).commit();
@@ -104,14 +108,14 @@ public class MenuPrincipal extends AppCompatActivity {
         gpsButton.setText("GPS");
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                comprobarGPS();
+            public void onClick(View v) {
+                getCoordenadasGPS();
             }
         });
 
         //Configure initial fragment
-        if(findViewById(R.id.fragment_container) != null){
-            if(savedInstanceState!= null){
+        if (findViewById(R.id.fragment_container) != null) {
+            if (savedInstanceState != null) {
                 return;
             }
             Favoritos firstFragment = new Favoritos();
@@ -121,7 +125,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     }
 
-    private void configureNavigationMenu(Bundle savedInstanceState){
+    private void configureNavigationMenu(Bundle savedInstanceState) {
 
         mTitle = mDrawerTitle = "Menú principal";
 
@@ -194,7 +198,7 @@ public class MenuPrincipal extends AppCompatActivity {
             return true;
         }
         // Handle action buttons
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.favorite_heart:
                 Favoritos newFragment = new Favoritos();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newFragment).addToBackStack(null).commit();
@@ -232,40 +236,40 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     private void selectItem(View v, int position) {
-        switch(position){
-            case 1 :
+        switch (position) {
+            case 1:
                 //Configuracion servidor
-                Intent i = new Intent(v.getContext(),ConfiguracionServidor.class);
+                Intent i = new Intent(v.getContext(), ConfiguracionServidor.class);
                 startActivity(i);
                 break;
-            case 2 :
+            case 2:
                 //Usuarios
-                Intent i2 = new Intent(v.getContext(),Usuarios.class);
+                Intent i2 = new Intent(v.getContext(), Usuarios.class);
                 startActivity(i2);
                 break;
-            case 3 :
+            case 3:
                 //Usuarios
-                Intent i3 = new Intent(v.getContext(),LoginActivity.class);
+                Intent i3 = new Intent(v.getContext(), LoginActivity.class);
                 startActivity(i3);
                 break;
         }
     }
 
     /**
-     * Comprueba si el gps está activado
+     * Comprueba si el gps está activado y obtiene las coordenadas geográficas
      */
-    public void comprobarGPS(){
-        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    public void getCoordenadasGPS() {
+        final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
 
         try {
-            gps_enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Error al comprobar el estado del GPS_PROVIDER", Toast.LENGTH_LONG).show();
         }
         try {
-            network_enabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), "Error al comprobar el estado del NETWORK_PROVIDER", Toast.LENGTH_LONG).show();
         }
@@ -274,6 +278,26 @@ public class MenuPrincipal extends AppCompatActivity {
             buildAlertMessageNoGps();
         }
 
+
+        Location location = null;
+        double latitude;
+        double longitude;
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PackageManager.PERMISSION_GRANTED);
+        }
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PackageManager.PERMISSION_GRANTED);
+        }
+
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            Toast.makeText(getApplicationContext(), "Coordenadas actuales (Lat,Long) = (" + latitude + ", " + longitude + ")", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
