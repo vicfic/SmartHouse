@@ -1,6 +1,8 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_google.setOnClickListener(this);
         button_server_settings.setOnClickListener(this);
 
-        //  Verifica si el gps está activado
+        //  Comprobación de si el GPS está activado
         final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
@@ -68,12 +70,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (!gps_enabled && !network_enabled) {
-            Toast.makeText(getApplicationContext(), "El GPS está desactivado", Toast.LENGTH_LONG).show();
-            
-            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            buildAlertMessageNoGps();
         }
 
     }
+
+    /**
+     * Muestra el mensaje de que no está activado el gps y permite activarlo
+     */
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("El GPS está desactivado ¿Desea activarlo?")
+                .setCancelable(false)
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
     @Override
     public void onClick(View v) {
