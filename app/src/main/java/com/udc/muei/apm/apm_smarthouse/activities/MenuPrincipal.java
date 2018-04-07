@@ -1,8 +1,12 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.NavigationBarAdapter;
@@ -43,6 +48,7 @@ public class MenuPrincipal extends AppCompatActivity {
     Button fragmentPlaces;
     Button fragmentFav;
     Button fragmentRut;
+    Button gpsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +97,15 @@ public class MenuPrincipal extends AppCompatActivity {
                 // Create new fragment and transaction
                 Rutinas newFragment = new Rutinas();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newFragment).addToBackStack(null).commit();
+            }
+        });
+
+        gpsButton = (Button) findViewById(R.id.gpsButton);
+        gpsButton.setText("GPS");
+        gpsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                comprobarGPS();
             }
         });
 
@@ -234,5 +249,51 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(i3);
                 break;
         }
+    }
+
+    /**
+     * Comprueba si el gps está activado
+     */
+    public void comprobarGPS(){
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+
+        try {
+            gps_enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del GPS_PROVIDER", Toast.LENGTH_LONG).show();
+        }
+        try {
+            network_enabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del NETWORK_PROVIDER", Toast.LENGTH_LONG).show();
+        }
+
+        if (!gps_enabled && !network_enabled) {
+            buildAlertMessageNoGps();
+        }
+
+    }
+
+    /**
+     * Muestra el mensaje de que no está activado el gps y permite activarlo
+     */
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("El GPS está desactivado ¿Desea activarlo?")
+                .setCancelable(false)
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 }

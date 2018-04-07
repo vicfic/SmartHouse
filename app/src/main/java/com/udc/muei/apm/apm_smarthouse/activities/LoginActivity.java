@@ -6,14 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.udc.muei.apm.apm_smarthouse.R;
 
@@ -52,48 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_twitter.setOnClickListener(this);
         button_google.setOnClickListener(this);
         button_server_settings.setOnClickListener(this);
-
-        //  Comprobación de si el GPS está activado
-        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean gps_enabled = false;
-        boolean network_enabled = false;
-
-        try {
-            gps_enabled = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del GPS_PROVIDER", Toast.LENGTH_LONG).show();
-        }
-        try {
-            network_enabled = manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(), "Error al comprobar el estado del NETWORK_PROVIDER", Toast.LENGTH_LONG).show();
-        }
-
-        if (!gps_enabled && !network_enabled) {
-            buildAlertMessageNoGps();
-        }
-
-    }
-
-    /**
-     * Muestra el mensaje de que no está activado el gps y permite activarlo
-     */
-    private void buildAlertMessageNoGps() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("El GPS está desactivado ¿Desea activarlo?")
-                .setCancelable(false)
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-                        dialog.cancel();
-                    }
-                });
-        final AlertDialog alert = builder.create();
-        alert.show();
     }
 
 
