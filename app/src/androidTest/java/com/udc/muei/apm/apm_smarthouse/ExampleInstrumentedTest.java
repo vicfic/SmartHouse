@@ -19,6 +19,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
+        //Comment needed for trying config
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.udc.muei.apm.apm_smarthouse", appContext.getPackageName());
