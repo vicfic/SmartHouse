@@ -1,13 +1,6 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
-import android.net.wifi.SupplicantState;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.util.NetworkHelper;
 
 /**
  * Created by DavidPC on 14/03/2018.
@@ -31,7 +25,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView username;
     TextView password;
     Boolean isWifiActive;
-
     ImageButton button_server_settings;
 
 
@@ -56,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_server_settings.setOnClickListener(this);
 
         //comprobación para saber si el WiFi está activado y conectado a algún punto de acceso
-        isWifiActive = checkWifiOnAndConnected();
+        isWifiActive = NetworkHelper.checkWifiOnAndConnected(getApplicationContext());
     }
 
     @Override
@@ -112,24 +105,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(getApplicationContext(), "Proceso de login con GOOGLE", Toast.LENGTH_LONG).show();
         makeIntent();
     }
-
-    private boolean checkWifiOnAndConnected() {
-        WifiManager wifi = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        if (wifi.isWifiEnabled()) {
-            //el wifi está activado
-            //comprobación para saber si el WiFi está conectado a algún punto de acceso
-            WifiInfo wifiInfo = wifi.getConnectionInfo();
-
-            if (wifiInfo.getNetworkId() == -1) {
-                Toast.makeText(getApplicationContext(), "WiFi activo: No está conectado a ningún punto de acceso", Toast.LENGTH_LONG).show();
-                return false; // No está conectado a ningún punto de acceso
-            }
-            Toast.makeText(getApplicationContext(), "WiFi activo: Está conectado a algún punto de acceso", Toast.LENGTH_LONG).show();
-            return true; // Conectado a un punto de acceso
-        } else {
-            Toast.makeText(getApplicationContext(), "El WiFi está desactivado", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
 }
