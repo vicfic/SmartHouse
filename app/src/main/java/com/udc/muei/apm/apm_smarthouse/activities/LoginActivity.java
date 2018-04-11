@@ -1,6 +1,8 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -49,7 +51,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_server_settings.setOnClickListener(this);
 
         //comprobación para saber si el WiFi está activado y conectado a algún punto de acceso
-        isWifiActive = NetworkHelper.checkWifiOnAndConnected(getApplicationContext());
+        isWifiActive = NetworkHelper.checkWifiOnAndConnected(getApplicationContext()) != 0;
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
+        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiManager.EXTRA_SUPPLICANT_CONNECTED);
+        intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        intentFilter.addAction(WifiManager.EXTRA_NEW_STATE);
+        registerReceiver(new NetworkHelper(), intentFilter);
     }
 
     @Override
