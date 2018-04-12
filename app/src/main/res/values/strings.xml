@@ -1,11 +1,20 @@
 <resources>
     <string name="app_name">APM-SmartHouse</string>
 
+    <!--- Login Google -->
+    <string name="login_google_titulo">SmartHouse</string>
+    <string name="texto_login_google_introduccion">Para que la aplicación SmartHouse pueda funcionar correctamente tienes que iniciar sesión con una cuenta de Google</string>
+
+    <!-- Configuracion servidor -->
+    <string name="configuracion_servidor_titulo">SmartHouse</string>
+    <string name="texto_configuracion_servidor">Es necesario que introduczas la dirección web y el puerto de tu servidor SmartHouse para que la aplicación se pueda comunicar con el sistema</string>
+    <string name="configuracion_servidor_subtitulo">Configuración de Servidor</string>
 
     <!--- Actividad Menu Principal -->
     <string name="toolbar_menu_principal_name">Menú Principal</string>
     <string name="action_favorite">Favoritos</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_refresh">Actualizar</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
@@ -46,10 +55,46 @@
 
     <!-- Actividad Configuración Servidor -->
     <string name="toolbar_configuracion_servidor_name">Configuración Servidor</string>
-    <string name="direccion_ip">Dirección IP</string>
+    <string name="direccion_ip">Dirección Servidor</string>
     <string name="puerto_servidor">Puerto</string>
     <string name="save">Guardar</string>
-    <string name="cancel">Cancelar</string>
+    <string name="cancel">Atrás</string>
+
+    <!-- Contenido de la barra de navegación -->
+    <string name="nav_config_serv">Configuración de Servidor</string>
+    <string name="nav_favoritos">Favoritos</string>
+    <string name="nav_usuarios">Usuarios</string>
+    <string name="nav_rutinas">Rutinas</string>
+    <string name="nav_lugares">Lugares</string>
+    <string name="nav_header_account">Opciones de Configuración</string>
+    <string name="nav_logout">Desconectarse</string>
+
+    <!-- Mensaje al hacer logout (Toast) -->
+    <string name="logout_toast">Desconectado</string>
+
+    <!-- Mensaje al guardar nueva configuración de servidor (Toast)-->
+    <string name="new_config_serv">Configuración guardada</string>
+
+    <!-- Mensaje al hacer login (Toast) -->
+    <string name="login_ok">Bienvenido</string>
+
+    <!-- CLAVES SHAREDPREFERENCES-->
+    <!-- Clave para las preferencias compartidas -->
+    <string name="key_for_shared_preferences">key_for_shared_preferences</string>
+    <!-- Clave para la IP del servidor -->
+    <string name="key_shared_IP">key_shared_ip</string>
+    <!-- Clave para el puerto del servidor -->
+    <string name="key_shared_port">key_shared_port</string>
+
+    <!-- Valor por defecto si no está guardada ninguna IP-->
+    <string name="default_value_IP"></string>
+    <string name="default_value_port"></string>
+
+    <string name="nombre_frag_lugares">Lugares</string>
+    <string name="nombre_frag_favoritos">Favoritos</string>
+    <string name="nombre_frag_rutinas">Rutinas</string>
+
+    <string name="server_client_id">804708077121-jlt5no06s0e33r1fp732ei8i4k4st5d1.apps.googleusercontent.com</string>
 
 
 </resources>

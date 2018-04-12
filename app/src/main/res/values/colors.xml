@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#FF523BEB</color>
+    <color name="colorAccent">#be104b</color>
     <color name="white">#ffffff</color>
+    <color name="md_text">#df000000</color>
+
+    <color name="naranja_oscuro">#FF4E19</color>
+    <color name="naranja_claro">#FF7D3C</color>
+
+    <color name="indicador_rojo">#f70800</color>
+    <color name="ondicador_verde">#60ff3c</color>
 </resources>
+

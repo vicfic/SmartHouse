@@ -1,17 +1,10 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
-import com.udc.muei.apm.apm_smarthouse.R;
-import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.adapters.UsuarioAdapter;
-import com.udc.muei.apm.apm_smarthouse.interfaces.UsuarioListClicksListeners;
-import com.udc.muei.apm.apm_smarthouse.model.Routine;
 import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,12 +21,12 @@ public class Usuarios extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_usuarios);
+        /*setContentView(R.layout.activity_usuarios);
 
         root =  getIntent().getBooleanExtra("root", false);
 
         /* Toolbar de la actividad */
-        Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.usuarios_toolbar);
+        /*Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.usuarios_toolbar);
         toolbarRoutine.setTitle(getString(R.string.toolbar_usuarios_name));
         toolbarRoutine.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbarRoutine);
@@ -41,15 +34,15 @@ public class Usuarios extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /* Lista de usuarios 'light' */
-        usuariosList= findViewById(R.id.usuarios_list);
+        /*usuariosList= findViewById(R.id.usuarios_list);
         usuariosArray= new ArrayList<>();
 
         /*****************************************************************************************/
         /* Aqui se haria la petición al servidor */
-        Toast.makeText(getApplicationContext(),"Petición GET. Lista de usuarios del sistema",Toast.LENGTH_LONG).show();
+        /*Toast.makeText(getApplicationContext(),"Petición GET. Lista de usuarios del sistema",Toast.LENGTH_LONG).show();
 
         /* Fake Data */
-        usuariosArray.add(new UsuarioLight(1, "Victor"));
+        /*usuariosArray.add(new UsuarioLight(1, "Victor"));
         usuariosArray.add(new UsuarioLight(2, "Manuel"));
         usuariosArray.add(new UsuarioLight(3, "Elias"));
         usuariosArray.add(new UsuarioLight(4, "David"));
@@ -61,7 +54,7 @@ public class Usuarios extends AppCompatActivity {
         usuariosArray.add(new UsuarioLight(10, "Gabriel"));
         /*****************************************************************************************/
 
-        usuariosAdapter = new UsuarioAdapter(usuariosArray, getApplicationContext(), new UsuarioListClicksListeners() {
+        /*usuariosAdapter = new UsuarioAdapter(usuariosArray, getApplicationContext(), new UsuarioListClicksListeners() {
             @Override
             public void onButtonUserClick(int position) {
                 UsuarioLight usuarioLight = (UsuarioLight) usuariosList.getItemAtPosition(position);
@@ -73,7 +66,7 @@ public class Usuarios extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        usuariosList.setAdapter(usuariosAdapter);
+        usuariosList.setAdapter(usuariosAdapter);*/
     }
 
     @Override

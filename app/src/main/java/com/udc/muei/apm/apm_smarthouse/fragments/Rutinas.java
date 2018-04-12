@@ -1,27 +1,15 @@
 package com.udc.muei.apm.apm_smarthouse.fragments;
 
 
-import android.app.Fragment;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.activities.Luces;
 import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.interfaces.RoutineListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.Routine;
@@ -45,7 +33,7 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
         /******************************************************************************************/
         /* Esta información está introducida manualmente de momento, a posterior, estos datos serán
         enviados por el servidor */
-        routineArray.add(new Routine("Luces", true));
+        routineArray.add(new Routine("Luces", true, new Intent(getContext(), Luces.class)));
         routineArray.add(new Routine("Calefacción", false));
         routineArray.add(new Routine("Televisor", false));
         routineArray.add(new Routine("Desumificador", true));
@@ -57,6 +45,8 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
                 Routine routine = (Routine) getListView().getItemAtPosition(position);
                 Toast.makeText(getContext(),"Rutina "+ routine.getName() +". Botón configuración pulsado" , Toast.LENGTH_SHORT).show();
                 Log.d(RUTINAS_TAG, "Rutina "+ routine.getName() +". Botón configuración pulsado");
+                if(routine.getIntent()!=null)
+                    startActivity(routine.getIntent());
             }
 
             @Override

@@ -3,7 +3,6 @@ package com.udc.muei.apm.apm_smarthouse.adapters;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.model.Device;
 import com.udc.muei.apm.apm_smarthouse.model.TipoDispositivo;
 
-import java.util.Dictionary;
 import java.util.List;
 
 /**

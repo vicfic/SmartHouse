@@ -14,7 +14,6 @@ import com.udc.muei.apm.apm_smarthouse.adapters.DeviceAdapter;
 import com.udc.muei.apm.apm_smarthouse.model.Device;
 import com.udc.muei.apm.apm_smarthouse.model.Lugar;
 import com.udc.muei.apm.apm_smarthouse.model.TipoDispositivo;
-import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
 
 import java.util.ArrayList;
 import java.util.List;

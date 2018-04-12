@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.interfaces.HttpsRequestResult;
 
 import org.json.JSONObject;
@@ -39,7 +40,7 @@ import javax.net.ssl.X509TrustManager;
  * Created by José Manuel González on 23/03/2018.
  */
 
-public class HttpsRequestAsyncTask extends AsyncTask<Void, Void, String> {
+public class HttpsRequestAsyncTask extends AsyncTask<String, Void, String> {
 
     private static final String GET_TAG = "GET USUARIOS";
 
@@ -64,12 +65,14 @@ public class HttpsRequestAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        pdia = new ProgressDialog(mContext);
-        pdia.setTitle("Cargando...");
-        pdia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pdia = new ProgressDialog(mContext , R.style.MyAlertDialogStyle);
+
+
+        //pdia.setTitle("Cargando...");
+        //pdia.setProgressStyle(R.style.MyAlertDialogStyle);
         pdia.setCancelable(false);
-        pdia.setIcon(android.R.drawable.btn_plus);
-        pdia.setMessage("Realizando petición al servidor...");
+        //pdia.setIcon(android.R.drawable.btn_plus);
+        pdia.setMessage("Cargando...");
         pdia.show();
         Log.d(GET_TAG,"<--> OnPreExecute <-->");
 
@@ -107,18 +110,18 @@ public class HttpsRequestAsyncTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected String doInBackground(String... params) {
         pdia.show();
 
         try {
             // This is getting the url from the string we passed in
             List<String> session = null;
             HttpsURLConnection writeConn;
-            Log.d(GET_TAG,"Cambiando");
+            Log.d(GET_TAG,"Token---->"+params[0]);
 
 
             //URL url = new URL("https://192.168.43.76:8000/SmartHouse/");
-            URL url = new URL("https://192.168.0.25:8000/SmartHouse/");
+            URL url = new URL("https://192.168.0.25:8000/login/");
 
             writeConn = (HttpsURLConnection) url.openConnection();
 
@@ -142,8 +145,7 @@ public class HttpsRequestAsyncTask extends AsyncTask<Void, Void, String> {
                 DataOutputStream dOut = new DataOutputStream(writeConn.getOutputStream());
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(dOut, "UTF-8"));
                 JSONObject jsonEnv = new JSONObject();
-                jsonEnv.put("idUSUARIO",111);
-                jsonEnv.put("nombre","manuel");
+                jsonEnv.put("tokenId",params[0]);
                 writer.write(jsonEnv.toString());  // Escribir aqui la info en formato JSON
                 writer.flush();
                 writer.close();

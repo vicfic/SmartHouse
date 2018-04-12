@@ -1,11 +1,14 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
-import android.graphics.Color;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,31 +20,35 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
     TextView port;
     Button cancel;
     Button save;
+    ImageView back;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_configuracion_servidor);
-
-        /* Toolbar de la actividad */
-        Toolbar toolbarRoutine = (Toolbar) findViewById(R.id.configuracion_toolbar);
-        toolbarRoutine.setTitle(getString(R.string.toolbar_configuracion_servidor_name));
-        toolbarRoutine.setTitleTextColor(Color.WHITE);
-        setSupportActionBar(toolbarRoutine);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        Toast.makeText(getApplicationContext(),"Lectura/Modificación de preferencias de la aplicación.", Toast.LENGTH_LONG).show();
 
         ipAddress = findViewById(R.id.edittext_ip_servidor);
         port = findViewById(R.id.edittext_puerto);
+
         save = findViewById(R.id.button_save_config);
         cancel = findViewById(R.id.button_cancel_config);
+        back = findViewById(R.id.boton_back);
 
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);
+        back.setOnClickListener(this);
 
+        /* Actualización de la información guardada en shared preferences */
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
+        String ip_serv = sharedPref.getString(getString(R.string.key_shared_IP), getString(R.string.default_value_IP));
+        String port_serv = sharedPref.getString(getString(R.string.key_shared_port), getString(R.string.default_value_port));
+       if (!ip_serv.equals(getString(R.string.default_value_IP)))
+           ipAddress.setText(ip_serv);
+       if (!port_serv.equals(getString(R.string.default_value_port)))
+           port.setText(port_serv);
 
     }
 
@@ -50,6 +57,12 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
         Toast.makeText(getApplicationContext(),"Botón Back presionado " , Toast.LENGTH_SHORT).show();
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();;
     }
 
     @Override
@@ -62,12 +75,25 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
                     saveConfigServer(ipAddress.getText().toString(), port.getText().toString());
                 break;
             case R.id.button_cancel_config:
-                onBackPressed();
+                finish();
+                break;
+            case R.id.boton_back:
+                finish();
                 break;
         }
     }
 
     private void saveConfigServer(String ipAddress, String port){
-        Toast.makeText(getApplicationContext(), "Configuración con IP: "+ ipAddress+" y puerto: "+port+" guardada.", Toast.LENGTH_LONG).show();
+        /* Guardamos la información introducida */
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(getString(R.string.key_shared_IP), ipAddress);
+        editor.putString(getString(R.string.key_shared_port), port);
+        editor.commit();
+
+        /* Se acaba la activity y se vuelve a la actividad principal*/
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 }

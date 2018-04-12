@@ -4,7 +4,6 @@ import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.interfaces.UsuarioListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;

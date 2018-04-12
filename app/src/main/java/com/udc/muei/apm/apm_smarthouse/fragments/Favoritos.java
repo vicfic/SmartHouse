@@ -1,19 +1,10 @@
 package com.udc.muei.apm.apm_smarthouse.fragments;
 
-import android.app.ListFragment;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.DeviceAdapter;
 import com.udc.muei.apm.apm_smarthouse.model.Device;
 import com.udc.muei.apm.apm_smarthouse.model.TipoDispositivo;
@@ -36,7 +27,6 @@ public class Favoritos extends android.support.v4.app.ListFragment {
 
         /* Lista de dispositivos favoritos*/
         deviceArray = new ArrayList<>();
-
 
         /*****************************************************************************************/
         /* Aqui se haria la petición al servidor */

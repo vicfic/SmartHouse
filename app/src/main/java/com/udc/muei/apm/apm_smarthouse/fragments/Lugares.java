@@ -1,26 +1,15 @@
 package com.udc.muei.apm.apm_smarthouse.fragments;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import com.udc.muei.apm.apm_smarthouse.R;
+
 import com.udc.muei.apm.apm_smarthouse.activities.DispositivosLugar;
 import com.udc.muei.apm.apm_smarthouse.adapters.LugarAdapter;
-import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.interfaces.LugarListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.Lugar;
-import com.udc.muei.apm.apm_smarthouse.model.Routine;
-import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
-import android.support.v4.app.ListFragment;
+
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,9 +20,11 @@ public class Lugares extends android.support.v4.app.ListFragment implements Adap
     private static LugarAdapter lugaresAdapter;
     private ArrayList<Lugar> lugarArray;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         /* Lista de rutinas */
         lugarArray = new ArrayList<>();
