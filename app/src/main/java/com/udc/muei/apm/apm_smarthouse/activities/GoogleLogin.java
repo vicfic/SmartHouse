@@ -79,7 +79,7 @@ public class GoogleLogin extends AppCompatActivity {
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         } catch (ApiException e) {
-            Log.w(LOGIN_GOOGLE_TAG, "signInResult:failed code=" + e.getStatusCode());
+            e.printStackTrace();
         }
     }
 }
