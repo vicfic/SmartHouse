@@ -5,9 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -38,10 +37,11 @@
         <activity
             android:name=".activities.GoogleLogin"
             android:theme="@style/NoBarTheme" />
-        <activity android:name=".activities.Luces"></activity>
+        <activity android:name=".activities.Luces" />
 
-        <service android:name="com.udc.muei.apm.apm_smarthouse.Services.BoundService">
-        </service>
+        <service android:name=".Services.BoundService"></service>
+
+        <activity android:name=".activities.ComprobacionGPS"></activity>
     </application>
 
 </manifest>

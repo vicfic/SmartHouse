@@ -179,23 +179,27 @@ public class Luces extends AppCompatActivity{
             // Extract data included in the Intent
             ArrayList<BeaconCustom> beacons = intent.getParcelableArrayListExtra(KEY_RCV_MSG_beacons);
 
-            /*Como por el momento solo hay un beacon, lo replicamos en el array para que se muestre dos veces en la lista*/
-            BeaconCustom beacon = beacons.get(0);
-            beacon.setDistanciaRango(10.0);
-            BeaconCustom beaconNew = new BeaconCustom(beacon.getDistance(),
-                    beacon.getUuid(),
-                    beacon.getIdGrupo(),
-                    beacon.getIdBeacon()+1,
-                    beacon.getBluetoothName(),
-                    beacon.getBluetoothAddress(),
-                    beacon.getAverageRssi(),
-                    beacon.getRssi(),
-                    0.0);
-            beacons.add(beaconNew);
+            if (beacons!=null){
+
+                /*Como por el momento solo hay un beacon, lo replicamos en el array para que se muestre dos veces en la lista*/
+                if(beacons.size()>0){
+                    BeaconCustom beacon = beacons.get(0);
+                    if (beacon!=null){
+                        beacon.setDistanciaRango(10.0);
+                        BeaconCustom beaconNew = new BeaconCustom(beacon.getDistance(),
+                                beacon.getUuid(),
+                                beacon.getIdGrupo(),
+                                beacon.getIdBeacon()+1,
+                                beacon.getBluetoothName(),
+                                beacon.getBluetoothAddress(),
+                                beacon.getAverageRssi(),
+                                beacon.getRssi(),
+                                0.0);
+                        beacons.add(beaconNew);
+                    }
+                }
             /* SACAR CUANDO HAYA MAS BEACONS*/
 
-
-            if (beacons!=null){
 
                 final ListView listBeacons = findViewById(R.id.list_beacons);
                 BeaconAdapter beaconAdapter = new BeaconAdapter(getApplicationContext(), beacons);
