@@ -7,6 +7,15 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.wifi" />
 
     <application
         android:allowBackup="true"
@@ -15,14 +24,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.LoginActivity" />
 
         <fragment android:name=".activities.Favoritos" />
         <fragment android:name=".activities.Rutinas" />
         <fragment android:name=".activities.Lugares" />
 
         <activity android:name=".activities.Permisos" />
-        <activity android:name=".activities.Usuarios" />
         <activity android:name=".activities.MenuPrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,19 +46,10 @@
             android:theme="@style/NoBarTheme" />
         <activity android:name=".activities.Luces" />
 
-        <service android:name=".Services.BoundService"></service>
+        <service android:name=".Services.BoundService" />
 
-        <activity android:name=".activities.ComprobacionGPS"></activity>
+        <activity android:name=".activities.ComprobacionGPS" />
+        <activity android:name=".activities.ComprobacionWifi"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-feature android:name="android.hardware.wifi" />
 
 </manifest>

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 
 import com.udc.muei.apm.apm_smarthouse.activities.ComprobacionGPS;
+import com.udc.muei.apm.apm_smarthouse.activities.ComprobacionWifi;
 import com.udc.muei.apm.apm_smarthouse.activities.Luces;
 import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.interfaces.RoutineListClicksListeners;
@@ -36,7 +37,7 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
         enviados por el servidor */
         routineArray.add(new Routine("Luces", true, new Intent(getContext(), Luces.class)));
         routineArray.add(new Routine("Calefacción", false, new Intent(getContext(), ComprobacionGPS.class)));
-        routineArray.add(new Routine("Televisor", false));
+        routineArray.add(new Routine("Televisor", false, new Intent(getContext(), ComprobacionWifi.class)));
         routineArray.add(new Routine("Desumificador", true));
         /******************************************************************************************/
 
