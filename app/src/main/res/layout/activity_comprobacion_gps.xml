@@ -4,57 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.udc.muei.apm.apm_smarthouse.activities.Luces">
+    tools:context="com.udc.muei.apm.apm_smarthouse.activities.Luces"
+    android:background="@drawable/gradient_login_2">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/comprobacion_gps_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@drawable/gradient_6"
+
             android:elevation="4dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarTheme" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"/>
 
-        <Button
-            android:id="@+id/button_comprobar_gps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Comprobar GPS"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Longitud"
-            android:textStyle="bold"
-            android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/textview_longitud"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Longitud"
-            android:textSize="24sp"
-            android:textStyle="italic" />
-        <TextView
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/auto_calefaccion"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_weight="5" />
+
+            <CheckBox
+                android:id="@+id/checkBox_auto_calefaccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="16dp"
+                android:button="@drawable/custom_checkbox"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Latitud"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/textview_latitud"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/alcance_calefaccion"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editText_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:hint="@string/hint_alcance_calefaccion"
+                android:textColorHint="@color/white"
+                android:inputType="numberSigned"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:text="@string/magnitud_alcance_calefaccion"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <SeekBar
+            android:id="@+id/seekBar_calefaccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Latitud"
-            android:textSize="24sp"
-            android:textStyle="italic" />
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:maxHeight="3dp"
+            android:minHeight="3dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:progressDrawable="@drawable/seekbar_calefaccion"
+            android:thumbTint="@color/naranja_oscuro"/>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:id="@+id/mapa_google"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 

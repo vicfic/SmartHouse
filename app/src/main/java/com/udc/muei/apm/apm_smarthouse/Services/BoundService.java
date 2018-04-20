@@ -97,7 +97,6 @@ public class BoundService extends Service implements BeaconConsumer {
     }
 
 
-
     public String getTimestamp() {
         long elapsedMillis = SystemClock.elapsedRealtime()
                 - mChronometer.getBase();

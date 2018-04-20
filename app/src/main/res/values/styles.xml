@@ -38,4 +38,5 @@
     <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/naranja_oscuro</item>
     </style>
+
 </resources>

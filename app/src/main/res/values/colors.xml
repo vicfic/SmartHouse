@@ -8,6 +8,8 @@
 
     <color name="naranja_oscuro">#FF4E19</color>
     <color name="naranja_claro">#FF7D3C</color>
+    <color name="naranja_oscuro_transparente">#5eff4e19</color>
+    <color name="naranja_claro_transparente">#41ff7d3c</color>
 
     <color name="indicador_rojo">#f70800</color>
     <color name="ondicador_verde">#60ff3c</color>

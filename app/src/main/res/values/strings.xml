@@ -86,6 +86,9 @@
     <string name="key_shared_IP">key_shared_ip</string>
     <!-- Clave para el puerto del servidor -->
     <string name="key_shared_port">key_shared_port</string>
+    <!-- Clave para la rutina de calefaccion -->
+    <string name="key_shared_rutina_calefaccion">key_shared_rutina_calefaccion</string>
+
 
     <!-- Valor por defecto si no está guardada ninguna IP-->
     <string name="default_value_IP"></string>
@@ -97,5 +100,58 @@
 
     <string name="server_client_id">804708077121-jlt5no06s0e33r1fp732ei8i4k4st5d1.apps.googleusercontent.com</string>
 
+    <!-- Actividad rutina calefaccion -->
+    <string name="titulo_rutina_calefaccion">Rutina Calefacción</string>
+    <string name="rutina_calefaccion_activada">Rutina Calefacción Activada</string>
+    <string name="rutina_calefaccion_desactivada">Rutina Calefacción Desactivada</string>
+
+    <string name="auto_calefaccion">Encender Calefacción Automáticamente</string>
+    <string name="alcance_calefaccion">Alcance:</string>
+    <string name="magnitud_alcance_calefaccion">metros.</string>
+    <string name="hint_alcance_calefaccion">radio en</string>
+    <string name="error_max_value_radius">Error. El valor máximo del alcance (en metros) es</string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="geofence_transition_dwell">Dwell</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="button_notification_YES">Si</string>
+    <string name="button_notification_NO">No</string>
+
+    <!-- Transition type msg strings -->
+    <string name="geofence_transition_entered_msg">Acercándose a casa.</string>
+    <string name="geofence_transition_exited_msg">Alejándose de casa.</string>
+    <string name="geofence_transition_dwell_msg">Alrededor de casa.</string>
+    <string name="unknown_geofence_transition_msg">Transición desconocida.</string>
+
+    <string name="title_notification_auto_ON_calefaccion">Calefacción encendida automáticamente.</string>
+    <string name="msg_notification_auto_ON_calefaccion">Se ha enviado una petición al sistema SmartHouse para encender la calefacción automáticamente.</string>
+
+    <string name="geofence_transition_notification_text_ON">¿Desea encender la calefacción?</string>
+    <string name="geofence_transition_notification_text_OFF">¿Desea apagar la calefacción?</string>
+
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+</string>
+
+    <!-- Error strings -->
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+</string>
+
+    <string name="insufficient_permissions">Insufficient permissions.</string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permiso denegado, pero es esencial para el correcto
+        funcionamiento de la funcionalidad</string>
+    <string name="settings">Ajustes</string>
+
+    <string name="casa">Casa</string>
 
 </resources>

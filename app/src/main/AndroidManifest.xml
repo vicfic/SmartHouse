@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.wifi" />
 
@@ -24,11 +26,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <fragment android:name=".activities.Favoritos" />
-        <fragment android:name=".activities.Rutinas" />
-        <fragment android:name=".activities.Lugares" />
-
         <activity android:name=".activities.Permisos" />
         <activity android:name=".activities.MenuPrincipal">
             <intent-filter>
@@ -49,7 +46,37 @@
         <service android:name=".Services.BoundService" />
 
         <activity android:name=".activities.ComprobacionGPS" />
-        <activity android:name=".activities.ComprobacionWifi"></activity>
+        <activity android:name=".activities.ComprobacionWifi" />
+
+        <receiver android:name=".broadcastReceivers.initMobileReceiver">
+            <intent-filter>
+                <action android:name="com.udc.muei.apm.apm_smarthouse.Services.COMPROBACION_LOCALIZACION_DESTROY" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".Services.ComprobacionLocalizacion"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Services.GeofenceRegistrationService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".broadcastReceivers.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyADhJ-uyG-DsJbIIX4f4C1zpRBSGc06V38" />
+
+        <receiver
+            android:name=".broadcastReceivers.NotificationCalefaccionReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
