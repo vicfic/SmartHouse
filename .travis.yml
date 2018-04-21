@@ -60,7 +60,8 @@ android:
   script:
     - ./gradlew clean build
     - ./gradlew check -PdisablePreDex --continue --stacktrace
-    - ./gradlew connectedCheck -PdisablePreDex --continue --stacktrace
+#    - ./gradlew connectedCheck -PdisablePreDex --continue --stacktrace
+    - gradle build connectedCheck
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
 
