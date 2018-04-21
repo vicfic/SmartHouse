@@ -60,8 +60,8 @@ android:
   script:
     - ./gradlew clean build
     - ./gradlew check -PdisablePreDex --continue --stacktrace
+#    fixme esta es la linea que da el error:
 #    - ./gradlew connectedCheck -PdisablePreDex --continue --stacktrace
-    - gradle build connectedCheck
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
 
