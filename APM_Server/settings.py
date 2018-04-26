@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -25,8 +24,8 @@ SECRET_KEY = '^_1@l!%(w6z9y&@=-f_k_-o*m%%@1on@-5wq%h0)jet_o#g@f9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.1.14', '127.0.0.1','192.168.43.76','192.168.0.18','192.168.0.25']
-
+#ALLOWED_HOSTS = ['localhost','192.168.1.14', '127.0.0.1','192.168.43.76','192.168.0.18','192.168.0.25']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 

@@ -13,8 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.db import transaction
-from .models import Profile
-from .forms import UserForm,ProfileForm
+#from .forms import UserForm,ProfileForm
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
