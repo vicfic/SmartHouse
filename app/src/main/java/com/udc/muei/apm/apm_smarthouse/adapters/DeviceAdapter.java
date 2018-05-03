@@ -67,6 +67,7 @@ public class DeviceAdapter extends BaseAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         Device device = deviceList.get((Integer) buttonView.getTag());
+                        //FIXME Hemos detectado que al seleccionar un switch, muestra el nombre de un dispositivo que no es el actual
                         Toast.makeText(buttonView.getContext(), " Switch de "+ device.getName()+" "+ (isChecked?"activado":"desactivado"+". Enviando POST al servidor"), Toast.LENGTH_LONG).show();
                     }
                 });

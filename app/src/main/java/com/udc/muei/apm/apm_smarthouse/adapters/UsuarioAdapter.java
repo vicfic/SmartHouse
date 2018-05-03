@@ -1,5 +1,7 @@
 package com.udc.muei.apm.apm_smarthouse.adapters;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.interfaces.UsuarioListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.model.UsuarioLight;
@@ -14,6 +16,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -29,7 +32,7 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
 
 
     private static class ViewHolder {
-
+        CircleImageView image_view;
         Button button_row;
     }
 
@@ -69,7 +72,6 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
                 }
             });
 
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -77,6 +79,16 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
 
         viewHolder.button_row.setTag(position);
         viewHolder.button_row.setText(usuarioLight.getName());
+        viewHolder.image_view = convertView.findViewById(R.id.usuario_image_adapter);
+        if (usuarioLight.getPhotoUrl()!=null) {
+            Glide.with(getContext()).load(usuarioLight.getPhotoUrl())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(viewHolder.image_view);
+        } else {
+            viewHolder.image_view.setImageResource(R.drawable.home);
+        }
         return convertView;
     }
 }

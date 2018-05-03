@@ -59,9 +59,6 @@ import com.udc.muei.apm.apm_smarthouse.util.GeofenceErrorMessages;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
-
 
 
 public class ComprobacionGPS extends AppCompatActivity implements OnCompleteListener<Void>, OnMapReadyCallback {
@@ -206,7 +203,7 @@ public class ComprobacionGPS extends AppCompatActivity implements OnCompleteList
 
     /**
      * En esta función se deshabilitará parte de los controles si la rutina no está activada, y
-     * se habilitarás si está activada
+     * se habilitará si está activada
      */
     private void setButtonsEnabledState() {
         if (getGeofencesAdded()) {
@@ -217,7 +214,7 @@ public class ComprobacionGPS extends AppCompatActivity implements OnCompleteList
     }
 
     /**
-     * Esta función crea una lista de geofences, es este caso de un solo elemento (la casa). Para
+     * Esta función crea una lista de geofences, en este caso de un solo elemento (la casa). Para
      * conseguir la posición de la casa, sería necesario realizar una petición de dicha posición
      * al servidor cuando se inicie o se pare la rutina
      */
