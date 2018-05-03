@@ -88,7 +88,10 @@
     <string name="key_shared_port">key_shared_port</string>
     <!-- Clave para la rutina de calefaccion -->
     <string name="key_shared_rutina_calefaccion">key_shared_rutina_calefaccion</string>
-
+    <!-- Clave para eula aceptado -->
+    <string name="key_eula_accepted">key_eula_accepted</string>
+    <!-- Clave para eula aceptado -->
+    <string name="key_eula_edited">key_eula_edited</string>
 
     <!-- Valor por defecto si no está guardada ninguna IP-->
     <string name="default_value_IP"></string>
@@ -153,5 +156,12 @@
     <string name="settings">Ajustes</string>
 
     <string name="casa">Casa</string>
+
+
+    <!-- Strings eula -->
+    <string name="cancel_eula">Rechazar</string>
+    <string name="agree_eula">Aceptar</string>
+    <string name="contenido_eula">Dwell</string>
+
 
 </resources>

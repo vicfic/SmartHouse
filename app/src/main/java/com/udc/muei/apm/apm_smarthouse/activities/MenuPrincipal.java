@@ -160,13 +160,30 @@ public class MenuPrincipal extends AppCompatActivity {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
         String ip_serv = sharedPref.getString(getString(R.string.key_shared_IP), getResources().getString(R.string.default_value_IP));
         String port_serv = sharedPref.getString(getString(R.string.key_shared_port), getResources().getString(R.string.default_value_port));
-        if ((ip_serv.equals(getResources().getString(R.string.default_value_IP)))||
-                (port_serv.equals(getResources().getString(R.string.default_value_port)))){
-            Log.d(LOGIN_TAG, "No hai configuración de servidor previa");
-            Intent intent = new Intent(this,ConfiguracionServidor.class);
-            startActivityForResult(intent, REQUEST_CONFIG_SERV);
+        Boolean eula_aceptada = sharedPref.getBoolean(getString(R.string.key_eula_accepted),false);
+        Boolean eula_editada = sharedPref.getBoolean(getString(R.string.key_eula_edited),false);
+        if((!eula_aceptada)&&(!eula_editada)) {
+            Log.d(LOGIN_TAG, "No hai eula aceptada");
+            Intent intent = new Intent(this, Eula.class);
+            startActivity(intent);
         }else{
-            Log.d(LOGIN_TAG, "Configuración Servidor:\n\t-IP: "+ip_serv+"\n\t-Puerto: "+port_serv);
+
+            if ((eula_editada)&&(!eula_aceptada)){
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean(getString(R.string.key_eula_edited), false);
+                editor.commit();
+                finish();
+
+            }else{
+                if ((ip_serv.equals(getResources().getString(R.string.default_value_IP)))||
+                        (port_serv.equals(getResources().getString(R.string.default_value_port)))){
+                    Log.d(LOGIN_TAG, "No hai configuración de servidor previa");
+                    Intent intent = new Intent(this,ConfiguracionServidor.class);
+                    startActivityForResult(intent, REQUEST_CONFIG_SERV);
+                }else{
+                    Log.d(LOGIN_TAG, "Configuración Servidor:\n\t-IP: "+ip_serv+"\n\t-Puerto: "+port_serv);
+                }
+            }
         }
         /* Comprobación de usuario logueado */
         mGoogleSignInClient.silentSignIn()

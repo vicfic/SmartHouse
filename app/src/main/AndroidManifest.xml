@@ -76,7 +76,9 @@
         <receiver
             android:name=".broadcastReceivers.NotificationCalefaccionReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <activity android:name=".activities.Eula"></activity>
     </application>
 
 </manifest>
