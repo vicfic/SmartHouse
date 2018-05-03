@@ -7,6 +7,15 @@
     android:longClickable="true">
 
 
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/usuario_image_adapter"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/home"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
+
     <Button
         android:id="@+id/usuario_button_adapter"
         android:layout_width="match_parent"
@@ -15,6 +24,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"
+        android:layout_gravity="center_vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 

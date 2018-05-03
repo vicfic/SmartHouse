@@ -1,9 +1,6 @@
 package com.udc.muei.apm.apm_smarthouse.Services;
 
-import android.app.ActivityManager;
-import android.app.Application;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
@@ -12,8 +9,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.widget.Toast;
-
-import java.util.List;
 
 public class ComprobacionLocalizacion extends Service {
 

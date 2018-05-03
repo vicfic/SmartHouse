@@ -10,10 +10,25 @@ import android.os.Parcelable;
 public class UsuarioLight implements Parcelable{
     int idUsuarioDjango;
     String name;
+    String photoUrl;
 
     public UsuarioLight(int idUsuarioDjango, String name) {
         this.idUsuarioDjango = idUsuarioDjango;
         this.name = name;
+    }
+
+    public UsuarioLight(int idUsuarioDjango, String name, String photoUrl) {
+        this.idUsuarioDjango = idUsuarioDjango;
+        this.name = name;
+        this.photoUrl = photoUrl;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public int getIdUsuarioDjango() {
