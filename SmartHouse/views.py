@@ -17,6 +17,9 @@ from django.db import transaction
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
+from SmartHouse.models import Propiedades, Rutinas, Usuarios, RutinasUsuarios, Roles, RolesUsuarios, Lugares, TipoDispositivo, Dispositivos, Favoritos
+from django.core import serializers
+
 
 @csrf_exempt
 def index(request):
@@ -55,3 +58,64 @@ def index(request):
     #return HttpResponse(response_data,content_type='application/json')
     #return "<a href="{% url 'social:begin' 'google-oauth2' %}">Entrar con la cuenta de Google</a>"
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def propiedades(request):
+    propiedades = Propiedades.objects.all()
+    data = serializers.serialize('json', propiedades)
+
+    return HttpResponse(data, content_type='application/json')
+
+
+def rutinas(request):
+    rutinas = Rutinas.objects.all()
+    data = serializers.serialize('json', rutinas)
+
+    return HttpResponse(data, content_type='application/json')
+
+def usuarios(request):
+    usuarios = Usuarios.objects.all()
+    data = serializers.serialize('json', usuarios)
+
+    return HttpResponse(data, content_type='application/json')
+
+def rutinasusuarios(request):
+    rutinasusuarios = RutinasUsuarios.objects.all()
+    data = serializers.serialize('json', rutinasusuarios)
+
+    return HttpResponse(data, content_type='application/json')
+
+def roles(request):
+    roles = Roles.objects.all()
+    data = serializers.serialize('json', roles)
+
+    return HttpResponse(data, content_type='application/json')
+
+def rolesusuarios(request):
+    rolesusuarios = RolesUsuarios.objects.all()
+    data = serializers.serialize('json', rolesusuarios)
+
+    return HttpResponse(data, content_type='application/json')
+
+def lugares(request):
+    lugares = Lugares.objects.all()
+    data = serializers.serialize('json', lugares)
+
+    return HttpResponse(data, content_type='application/json')
+
+def tipodispositivo(request):
+    tipodispositivo = TipoDispositivo.objects.all()
+    data = serializers.serialize('json', tipodispositivo)
+
+    return HttpResponse(data, content_type='application/json')
+
+def dispositivos(request):
+    dispositivos = Dispositivos.objects.all()
+    data = serializers.serialize('json', dispositivos)
+
+    return HttpResponse(data, content_type='application/json')
+
+def favoritos(request):
+    favoritos = Favoritos.objects.all()
+    data = serializers.serialize('json', favoritos)
+
+    return HttpResponse(data, content_type='application/json')
