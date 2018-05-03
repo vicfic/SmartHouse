@@ -182,25 +182,25 @@ public class MenuPrincipal extends AppCompatActivity {
                     startActivityForResult(intent, REQUEST_CONFIG_SERV);
                 }else{
                     Log.d(LOGIN_TAG, "Configuración Servidor:\n\t-IP: "+ip_serv+"\n\t-Puerto: "+port_serv);
+                    /* Comprobación de usuario logueado */
+                    mGoogleSignInClient.silentSignIn()
+                            .addOnFailureListener(this, new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d(LOGIN_TAG, "No hai autenticacion previa");
+                                    handleNonSignIn();
+                                }
+                            })
+                            .addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
+                                @Override
+                                public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                                    Log.d(LOGIN_TAG, "Hai autenticacion previa");
+                                    handleSignInResult(task);
+                                }
+                            });
                 }
             }
         }
-        /* Comprobación de usuario logueado */
-        mGoogleSignInClient.silentSignIn()
-            .addOnFailureListener(this, new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                Log.d(LOGIN_TAG, "No hai autenticacion previa");
-                handleNonSignIn();
-                }
-            })
-            .addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
-                @Override
-                public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
-                Log.d(LOGIN_TAG, "Hai autenticacion previa");
-                handleSignInResult(task);
-                }
-            });
     }
 
     /* Se lanza cuando no hay un usuario logueado. Lanza la actividad de login */

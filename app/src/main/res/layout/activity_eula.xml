@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:adjustViewBounds="false"
+        android:adjustViewBounds="true"
+        android:maxHeight="30dp"
         app:srcCompat="@drawable/home" />
 
     <TextView
@@ -35,31 +36,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titulo_config_serv"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginTop="54dp"
-        android:text="@string/configuracion_servidor_subtitulo"
-        android:textAlignment="center"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/eula_subtitulo"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/explicacion_cofing_serv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/subtitulo_config_serv"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="56dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="4dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/texto_configuracion_servidor"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/subtitulo_config_serv">
+
+        <TextView
+            android:id="@+id/explicacion_cofing_serv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical|horizontal"
+            android:text="@string/contenido_eula"
+            android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </ScrollView>
+
 
 
     <LinearLayout

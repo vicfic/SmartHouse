@@ -161,7 +161,5 @@
     <!-- Strings eula -->
     <string name="cancel_eula">Rechazar</string>
     <string name="agree_eula">Aceptar</string>
-    <string name="contenido_eula">Dwell</string>
-
-
+    <string name="eula_subtitulo">Términos y condiciones</string>
 </resources>
