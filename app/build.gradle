@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
     defaultConfig {
-        applicationId "com.udc.muei.apm.apm_smarthouse"
+            applicationId "com.udc.muei.apm.apm_smarthouse2"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
