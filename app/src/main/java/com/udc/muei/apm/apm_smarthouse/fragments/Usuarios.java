@@ -29,10 +29,10 @@ public class Usuarios extends android.support.v4.app.ListFragment implements Ada
 
         /* ************************************************************************************** */
         /* Fake Data */
-        usuarioArray.add(new UsuarioLight(1, "Victor"));
-        usuarioArray.add(new UsuarioLight(2, "Manuel"));
-        usuarioArray.add(new UsuarioLight(3, "Elias"));
-        usuarioArray.add(new UsuarioLight(4, "David"));
+        usuarioArray.add(new UsuarioLight(1, "Victor", "https://image.freepik.com/vector-gratis/icono-de-usuario-masculino_17-810120247.jpg"));
+        usuarioArray.add(new UsuarioLight(2, "Manuel", "https://thumbs.dreamstime.com/z/icono-del-usuario-46707697.jpg"));
+        usuarioArray.add(new UsuarioLight(3, "Elias", "https://publicdomainvectors.org/photos/abstract-user-flat-3.png"));
+        usuarioArray.add(new UsuarioLight(4, "David", "https://icon-icons.com/icons2/1154/PNG/512/1486564400-account_81513.png"));
         usuarioArray.add(new UsuarioLight(5, "Gabriel"));
         usuarioArray.add(new UsuarioLight(6, "Victor"));
         usuarioArray.add(new UsuarioLight(7, "Manuel"));

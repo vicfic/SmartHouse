@@ -35,10 +35,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.udc.muei.apm.apm_smarthouse.AsyncTasks.HttpsRequestAsyncTask;
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.PagerAdapter;
-import com.udc.muei.apm.apm_smarthouse.interfaces.HttpsRequestResult;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

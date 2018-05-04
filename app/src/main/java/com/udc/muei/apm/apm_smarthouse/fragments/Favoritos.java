@@ -47,9 +47,6 @@ public class Favoritos extends android.support.v4.app.ListFragment {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add(0, v.getId(), 0, "Encender");//groupId, itemId, order, title
-        menu.add(0, v.getId(), 0, "Apagar");
-        menu.add(0, v.getId(), 0, "Ajustar temperatura");
     }
 
 
