@@ -16,11 +16,10 @@
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp" />
 
-    <Button
-        android:id="@+id/usuario_button_adapter"
+    <TextView
+        android:id="@+id/usuario_text_adapter"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
 
     private static class ViewHolder {
         CircleImageView image_view;
-        Button button_row;
+        TextView text_row;
     }
 
 
@@ -61,10 +62,11 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.usuario_adapter_layout, parent, false);
 
-            viewHolder.button_row = convertView.findViewById(R.id.usuario_button_adapter);
-            viewHolder.button_row.setBackgroundColor(ContextCompat.getColor(convertView.getContext(), R.color.colorPrimary));
-            viewHolder.button_row.setTextColor(ContextCompat.getColor(convertView.getContext(), R.color.white));
-            viewHolder.button_row.setOnClickListener(new View.OnClickListener() {
+            viewHolder.text_row = convertView.findViewById(R.id.usuario_text_adapter);
+            //viewHolder.text_row.setBackgroundColor(ContextCompat.getColor(convertView.getContext(), R.color.colorPrimary));
+            //viewHolder.text_row.setTextColor(ContextCompat.getColor(convertView.getContext(), R.color.white));
+
+            viewHolder.text_row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(usuarioListClicksListeners != null)
@@ -77,8 +79,8 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioLight> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.button_row.setTag(position);
-        viewHolder.button_row.setText(usuarioLight.getName());
+        viewHolder.text_row.setTag(position);
+        viewHolder.text_row.setText(usuarioLight.getName());
         viewHolder.image_view = convertView.findViewById(R.id.usuario_image_adapter);
         if (usuarioLight.getPhotoUrl()!=null) {
             Glide.with(getContext()).load(usuarioLight.getPhotoUrl())
