@@ -110,6 +110,8 @@ public class NotificationCalefaccionReceiver extends BroadcastReceiver {
         builder.setSmallIcon(R.drawable.home)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                         R.drawable.home))
+                // Le añadimos vibracion para asegurar que el usuario ve la notificacion
+                .setVibrate((new long[] { 1000, 1000, 1000, 1000, 1000 }))
                 .setColor(context.getColor(R.color.naranja_oscuro))
                 .setContentTitle(context.getString(R.string.title_notification_auto_ON_calefaccion))
                 .setContentText(context.getString(R.string.msg_notification_auto_ON_calefaccion))
