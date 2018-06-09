@@ -3,18 +3,24 @@ package com.udc.muei.apm.apm_smarthouse.activities;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.util.Constants;
 import com.udc.muei.apm.apm_smarthouse.util.NetworkHelper;
 
 public class ComprobacionWifi extends AppCompatActivity {
 
     Boolean isWifiActive;
+    private CheckBox checkBox_auto_luces;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +30,7 @@ public class ComprobacionWifi extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.comprobacion_wifi_toolbar);
 
-        toolbar.setTitle("Comprobación Wifi");
+        toolbar.setTitle(getString(R.string.titulo_rutina_luces));
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
@@ -33,6 +39,23 @@ public class ComprobacionWifi extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         isWifiActive = NetworkHelper.checkWifiOnAndConnected(getApplicationContext()) != 0;
+
+
+        /** Configuración del checkbox de opción automática*/
+        checkBox_auto_luces = findViewById(R.id.checkBox_auto_luces);
+        Boolean auto_luces = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(Constants.OPTION_AUTO_LUCES_KEY, false);
+        checkBox_auto_luces.setChecked(auto_luces);
+        checkBox_auto_luces.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                buttonView.setChecked(isChecked);
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                        .edit()
+                        .putBoolean(Constants.OPTION_AUTO_LUCES_KEY, isChecked)
+                        .apply();
+            }
+        });
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
         intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -45,7 +68,7 @@ public class ComprobacionWifi extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;

@@ -103,6 +103,14 @@
 
     <string name="server_client_id">804708077121-jlt5no06s0e33r1fp732ei8i4k4st5d1.apps.googleusercontent.com</string>
 
+
+    <!-- Actividad rutina luces -->
+    <string name="titulo_rutina_luces">Rutina Luces</string>
+    <string name="rutina_luces_activada">Rutina Luces Activada</string>
+    <string name="rutina_luces_desactivada">Rutina Luces Desactivada</string>
+        <string name="auto_luces">Encender Luces Automáticamente</string>
+
+
     <!-- Actividad rutina calefaccion -->
     <string name="titulo_rutina_calefaccion">Rutina Calefacción</string>
     <string name="rutina_calefaccion_activada">Rutina Calefacción Activada</string>

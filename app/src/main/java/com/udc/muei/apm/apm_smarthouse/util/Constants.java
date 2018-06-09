@@ -25,6 +25,9 @@ public class Constants {
     public static final String OPTION_AUTO_CALEFACCION_KEY = PACKAGE_NAME + ".OPTION_AUTO_CALEFACCION_KEY";
     public static final String LOCATION_LAT_HOME_KEY = PACKAGE_NAME + ".LOCATION_LAT_HOME_KEY";
     public static final String LOCATION_LNG_HOME_KEY = PACKAGE_NAME + ".LOCATION_LNG_HOME_KEY";
+
+    public static final String OPTION_AUTO_LUCES_KEY = PACKAGE_NAME + ".OPTION_AUTO_LUCES_KEY";
+
     /**
      * Used to set an expiration time for a geofence. After this amount of time Location Services
      * stops tracking the geofence.
