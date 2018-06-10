@@ -57,9 +57,9 @@
         </receiver>
 
         <service
-            android:name=".Services.ComprobacionLocalizacion"
-            android:enabled="true"
-            android:exported="true" />
+            android:name=".Services.ComprobacionLocalizacion"/>
+
+
         <service
             android:name=".Services.GeofenceRegistrationService"
             android:exported="true"
@@ -70,6 +70,15 @@
             android:enabled="true"
             android:exported="true" />
 
+        <receiver
+            android:name=".broadcastReceivers.WifiBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyADhJ-uyG-DsJbIIX4f4C1zpRBSGc06V38" />
@@ -79,7 +88,13 @@
             android:enabled="true"
             android:exported="true" />
 
+        <receiver
+            android:name=".broadcastReceivers.NotificationWifiReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity android:name=".activities.Eula"></activity>
+
     </application>
 
 </manifest>
