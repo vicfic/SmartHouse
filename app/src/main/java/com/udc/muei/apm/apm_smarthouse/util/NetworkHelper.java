@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import static android.content.Context.WIFI_SERVICE;
 
+//FIXME  WIFI: ver cómo hacer para que este broadcast receiver sea independiente de la activity, o sustituirlo por un servicio
 //Devuelve 0 si está desactivado el wifi, 1 si está activado y no conectado y 2 si está activado y conectado
 public class NetworkHelper extends BroadcastReceiver {
     public static int checkWifiOnAndConnected(Context contex) {

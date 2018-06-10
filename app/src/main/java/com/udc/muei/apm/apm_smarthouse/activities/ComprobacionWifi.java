@@ -1,5 +1,6 @@
 package com.udc.muei.apm.apm_smarthouse.activities;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.wifi.WifiManager;
@@ -13,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.Services.ServicioWifi;
 import com.udc.muei.apm.apm_smarthouse.util.Constants;
 import com.udc.muei.apm.apm_smarthouse.util.NetworkHelper;
 
@@ -27,6 +29,8 @@ public class ComprobacionWifi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprobacion_wifi);
 
+//        fixme WIFI: llamada al servicio de comprobación de wifi
+        startService(new Intent(ComprobacionWifi.this,ServicioWifi.class));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.comprobacion_wifi_toolbar);
 

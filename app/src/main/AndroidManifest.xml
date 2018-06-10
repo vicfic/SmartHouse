@@ -48,6 +48,16 @@
         <activity android:name=".activities.ComprobacionGPS" />
         <activity android:name=".activities.ComprobacionWifi" />
 
+        <receiver
+            android:name=".util.NetworkHelper"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".Services.ServicioWifi"
+            android:enabled="true"
+            android:exported="true" />
+
         <receiver android:name=".broadcastReceivers.initMobileReceiver">
             <intent-filter>
                 <action android:name="com.udc.muei.apm.apm_smarthouse.Services.COMPROBACION_LOCALIZACION_DESTROY" />
@@ -55,10 +65,11 @@
             </intent-filter>
         </receiver>
 
+        <!--FIXME WIFI: declaración del servicio-->
         <service
-            android:name=".Services.ComprobacionLocalizacion"
-            android:enabled="true"
-            android:exported="true" />
+            android:name=".Services.ComprobacionLocalizacion"/>
+
+
         <service
             android:name=".Services.GeofenceRegistrationService"
             android:exported="true"
@@ -75,6 +86,11 @@
 
         <receiver
             android:name=".broadcastReceivers.NotificationCalefaccionReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".broadcastReceivers.GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
 
