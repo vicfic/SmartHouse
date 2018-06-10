@@ -37,9 +37,9 @@ public class Lugares extends android.support.v4.app.ListFragment implements Adap
         /* Esta información está introducida manualmente de momento, a posterior, estos datos serán
         enviados por el servidor */
 
-        lugarArray.add(new Lugar("Salón", 1));
-        lugarArray.add(new Lugar("Cocina", 2));
-        lugarArray.add(new Lugar("Baño", 3));
+        lugarArray.add(new Lugar("Salón", 1, "http://www.vinilosa2duros.com/images/productes/mini068.jpg"));
+        lugarArray.add(new Lugar("Cocina", 2, "https://marketplace.canva.com/MAB60SJb5YI/1/thumbnail/canva-green-blender-home-kitchen-icon-MAB60SJb5YI.png"));
+        lugarArray.add(new Lugar("Baño", 3, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Wcd0y10l_sn924i5OOkTTjhHCRMG5jaq3-DfzezXtvCT8kMrlQ"));
         lugarArray.add(new Lugar("Despacho", 4));
         lugarArray.add(new Lugar("Habitación Principal", 5));
         lugarArray.add(new Lugar("Habitación invitados", 6));

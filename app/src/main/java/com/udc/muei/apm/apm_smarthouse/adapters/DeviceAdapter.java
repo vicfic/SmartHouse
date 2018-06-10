@@ -2,6 +2,7 @@
 package com.udc.muei.apm.apm_smarthouse.adapters;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,6 +89,8 @@ public class DeviceAdapter extends BaseAdapter {
             button_fav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final MediaPlayer mp = MediaPlayer.create(context, R.raw.star);
+                    mp.start();
                     Device device = deviceList.get((Integer) view.getTag());
                     if(device.isFavorite()) {
                         device.setFavorite(false);

@@ -10,10 +10,17 @@ import android.os.Parcelable;
 public class Lugar implements Parcelable {
     private String name;
     private int idDjangoLugar;
+    String photoUrl;
 
     public Lugar(String name, int idDjango) {
         this.name = name;
         this.idDjangoLugar = idDjango;
+    }
+
+    public Lugar(String name, int idDjangoLugar, String photoUrl) {
+        this.name = name;
+        this.idDjangoLugar = idDjangoLugar;
+        this.photoUrl = photoUrl;
     }
 
     public String getName() {
@@ -59,4 +66,12 @@ public class Lugar implements Parcelable {
             return new Lugar[size];
         }
     };
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 }

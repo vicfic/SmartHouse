@@ -4,10 +4,12 @@ package com.udc.muei.apm.apm_smarthouse.fragments;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -105,6 +107,8 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
 
             @Override
             public void onSwitchClick(int position, boolean isChecked) {
+                Vibrator vibe = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vibe.vibrate(100);
                 Routine routine = (Routine) getListView().getItemAtPosition(position);
                 if (routine.getState() != isChecked) {
                     routine.setState(isChecked);
