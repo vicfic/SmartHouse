@@ -4,14 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.udc.muei.apm.apm_smarthouse.R;
 
 public class ConfiguracionServidor extends AppCompatActivity implements View.OnClickListener{
@@ -22,6 +32,8 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
     Button save;
     ImageView back;
 
+    GoogleSignInClient mGoogleSignInClient;
+    private static final String LOGIN_TAG = "LOGIN_TAG";
 
 
     @Override
@@ -91,7 +103,46 @@ public class ConfiguracionServidor extends AppCompatActivity implements View.OnC
         editor.putString(getString(R.string.key_shared_port), port);
         editor.commit();
 
-        /* Se acaba la activity y se vuelve a la actividad principal*/
+
+        /* Creación del cliente para comprobar el login con Google*/
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        /* Comprobación de usuario logueado */
+        mGoogleSignInClient.silentSignIn()
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(LOGIN_TAG, "No hai autenticacion previa");
+                        handleNonSignIn();
+                    }
+                })
+                .addOnCompleteListener(this, new OnCompleteListener<GoogleSignInAccount>() {
+                    @Override
+                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                        Log.d(LOGIN_TAG, "Hai autenticacion previa");
+                        handleSignInResult(task);
+                    }
+                });
+
+
+
+    }
+
+    /* Se lanza cuando no hay un usuario logueado. Lanza la actividad de login */
+    private void handleNonSignIn() {
+        /* Lanzamos un intent para la ventana de login de google */
+        Intent intent = new Intent(this, GoogleLogin.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /* Se lanza cuando hay un usuario previamente logueado */
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        /* Se acaba la activity y se vuelve a la actividad principal */
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
