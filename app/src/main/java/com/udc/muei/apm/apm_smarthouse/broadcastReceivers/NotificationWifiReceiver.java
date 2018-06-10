@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
@@ -29,49 +30,33 @@ import static android.content.Context.WIFI_SERVICE;
 public class NotificationWifiReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "channel_02";
-
-    public static int checkWifiOnAndConnected(Context contex) {
-        WifiManager wifi = (WifiManager) contex.getSystemService(WIFI_SERVICE);
-        if (wifi.isWifiEnabled()) {
-            //el wifi está activado
-            //comprobación para saber si el WiFi está conectado a algún punto de acceso
-            WifiInfo wifiInfo = wifi.getConnectionInfo();
-            if (wifiInfo.getNetworkId() == -1) {
-                Toast.makeText(contex, "WiFi activo: No está conectado a ningún punto de acceso", Toast.LENGTH_LONG).show();
-                return 1; // No está conectado a ningún punto de acceso
-            }
-            Toast.makeText(contex, "WiFi activo: Está conectado a algún punto de acceso", Toast.LENGTH_LONG).show();
-            return 2; // Conectado a un punto de acceso
-        } else {
-            Toast.makeText(contex, "El WiFi está desactivado", Toast.LENGTH_LONG).show(); //WiFi desconectado
-            return 0;
-        }
-    }
+    private static final String TAG = NotificationWifiReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-        int wifiStatus = checkWifiOnAndConnected(context);
-
-        if (wifiStatus == 2) {
-            //se establece conexión wifi
-            ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            Network[] networks = connManager.getAllNetworks();
-
-            for (Network network : networks) { //recorro la lista de redes, en las válidas muestro el SSID
-                NetworkInfo ntkInfo = connManager.getNetworkInfo(network);
-                if (ntkInfo.getType() == ConnectivityManager.TYPE_WIFI && ntkInfo.isConnected()) {
-                    final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                    final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-                    if (connectionInfo != null) {
-                        Toast.makeText(context, "El WiFi al que estás conectado es " + ntkInfo.getExtraInfo() + "con SSID:" + connectionInfo.getSSID(), Toast.LENGTH_LONG).show();
-                        Log.d(NotificationWifiReceiver.class.getName(), ntkInfo.getExtraInfo() + "con SSID:" + connectionInfo.getSSID());
-                    }
-                }
-            }
-        } else if (wifiStatus == 1) {
-            //el wifi no está conectado
+        // Vemos si las luces se deben apagar automaticamente
+        boolean lucesAuto = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(Constants.OPTION_AUTO_LUCES_KEY, false);
+        // Vemos si nos ha enviado el usuario una respuesta de "Si"
+        int int_actionType  = intent.getIntExtra(Constants.NOTIFICACION_TRANSITION_ACTION_KEY, -1);
+        // Si las luces se deben apagar automaticamente o bien si nos ha llegado un "Si", enviamos notificacion para informar al usuario
+        if(lucesAuto) {
+            // Apagamos las luces
+            Toast.makeText(context, "Apagamos las luces", Toast.LENGTH_LONG).show();
+            Log.d(TAG, "Apagamos las luces");
             sendNotificationAuto(context);
+        } else {
+            if(int_actionType == Constants.ACTIONS_NOTIFICATIONS.YES.ordinal()){
+                // Si nos han respondido con "Si", borramos la notificación al usuario
+                Toast.makeText(context, "Nos han respondido que si, cancelamos notificacion", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Nos han respondido que si, cancelamos notificacion");
+            } else{
+                // Si nos han respondido con "No", borramos la notificación al usuario
+                Toast.makeText(context, "Nos han respondido que no, cancelamos notificacion", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Nos han respondido que no, cancelamos notificacion");
+            }
+
+            cancelNotificacion(context, Constants.LUCES_NOTIFICATION_ID);
+            return;
         }
     }
 
@@ -106,11 +91,9 @@ public class NotificationWifiReceiver extends BroadcastReceiver {
         PendingIntent notificationPendingIntent =
                 stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-
         // Notification builder
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-
-        //Configuración dela notificacion
+        // Configuración de la notificación automática
         builder.setSmallIcon(R.drawable.home)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                         R.drawable.home))
@@ -123,10 +106,17 @@ public class NotificationWifiReceiver extends BroadcastReceiver {
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(context.getString(R.string.msg_notification_auto_ON_wifi)))
                 .setAutoCancel(true);
+
         // Set the Channel ID for Android O.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(CHANNEL_ID); // Channel ID
         }
-        mNotificationManager.notify(Constants.NOTIFICATION_ID, builder.build());
+        mNotificationManager.notify(Constants.LUCES_NOTIFICATION_ID, builder.build());
+    }
+
+    private void cancelNotificacion(Context context, int id){
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) context.getSystemService(ns);
+        nMgr.cancel(id);
     }
 }

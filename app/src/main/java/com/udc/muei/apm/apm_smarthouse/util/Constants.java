@@ -18,16 +18,18 @@ public class Constants {
     public static final String PACKAGE_NAME = "com.google.android.gms.location.Geofence";
 
     public static final String NOTIFICATION_CALEFACCION_AUTO_KEY = PACKAGE_NAME + ".NOTIFICATION_CALEFACCION_AUTO_KEY";
+    public static final String NOTIFICATION_LUCES_AUTO_KEY = PACKAGE_NAME + ".NOTIFICATION_LUCES_AUTO_KEY";
     public static final String NOTIFICACION_TRANSITION_KEY = PACKAGE_NAME + ".NOTIFICACION_TRANSITION_KEY";
     public static final String NOTIFICACION_TRANSITION_ACTION_KEY = PACKAGE_NAME + ".NOTIFICACION_TRANSITION_ACTION_KEY";
     public static final String GEOFENCES_ADDED_KEY = PACKAGE_NAME + ".GEOFENCES_ADDED_KEY";
     public static final String WIFI_ADDED_KEY = PACKAGE_NAME + ".WIFI_ADDED_KEY";
     public static final String RADIUS_KEY = PACKAGE_NAME + ".RADIUS_KEY";
     public static final String OPTION_AUTO_CALEFACCION_KEY = PACKAGE_NAME + ".OPTION_AUTO_CALEFACCION_KEY";
+    public static final String OPTION_AUTO_LUCES_KEY = PACKAGE_NAME + ".OPTION_AUTO_LUCES_KEY";
     public static final String LOCATION_LAT_HOME_KEY = PACKAGE_NAME + ".LOCATION_LAT_HOME_KEY";
     public static final String LOCATION_LNG_HOME_KEY = PACKAGE_NAME + ".LOCATION_LNG_HOME_KEY";
 
-    public static final String OPTION_AUTO_LUCES_KEY = PACKAGE_NAME + ".OPTION_AUTO_LUCES_KEY";
+
 
     /**
      * Used to set an expiration time for a geofence. After this amount of time Location Services
@@ -70,5 +72,6 @@ public class Constants {
         YES, NO
     }
 
-    public static final int NOTIFICATION_ID = 1992;
+    public static final int CALEFACCION_NOTIFICATION_ID = 1992;
+    public static final int LUCES_NOTIFICATION_ID = 1994;
 }

@@ -195,7 +195,7 @@ public class GeofenceRegistrationService extends JobIntentService {
         builder.setAutoCancel(true);
 
         if (!auto_on)
-            mNotificationManager.notify(Constants.NOTIFICATION_ID, builder.build());
+            mNotificationManager.notify(Constants.CALEFACCION_NOTIFICATION_ID, builder.build());
     }
 
     /**

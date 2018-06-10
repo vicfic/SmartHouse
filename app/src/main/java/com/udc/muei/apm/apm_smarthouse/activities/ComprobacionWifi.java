@@ -28,9 +28,6 @@ public class ComprobacionWifi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comprobacion_wifi);
 
-//        fixme WIFI: llamada al servicio de comprobación de wifi
-        startService(new Intent(ComprobacionWifi.this, com.udc.muei.apm.apm_smarthouse.Services.ComprobacionWifi.class));
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.comprobacion_wifi_toolbar);
 
         toolbar.setTitle(getString(R.string.titulo_rutina_luces));
@@ -40,8 +37,6 @@ public class ComprobacionWifi extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        isWifiActive = NotificationWifiReceiver.checkWifiOnAndConnected(getApplicationContext()) != 0;
 
 
         /** Configuración del checkbox de opción automática*/
@@ -58,15 +53,6 @@ public class ComprobacionWifi extends AppCompatActivity {
                         .apply();
             }
         });
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
-        intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
-        intentFilter.addAction(WifiManager.EXTRA_SUPPLICANT_CONNECTED);
-        intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        intentFilter.addAction(WifiManager.EXTRA_NEW_STATE);
-        registerReceiver(new NotificationWifiReceiver(), intentFilter);
-
     }
 
     @Override

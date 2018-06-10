@@ -142,6 +142,7 @@
 
     <string name="geofence_transition_notification_text_ON">¿Desea encender la calefacción?</string>
     <string name="geofence_transition_notification_text_OFF">¿Desea apagar la calefacción?</string>
+    <string name="lights_transition_notification_text_OFF">¿Desea apagar las luces?</string>
 
     <string name="unknown_geofence_error">
         Unknown error: the Geofence service is not available now
@@ -171,6 +172,6 @@
     <string name="agree_eula">Aceptar</string>
     <string name="eula_subtitulo">Términos y condiciones</string>
     <string name="title_notification_auto_ON_wifi">Rutina Wifi</string>
-    <string name="msg_notification_auto_ON_wifi">Se ha enviado una petición al sistema SmartHouse para apagar las luces automáticamente</string>
+    <string name="msg_notification_auto_ON_wifi">Se ha enviado una petición al sistema SmartHouse para apagar las luces</string>
     <string name="key_shared_rutina_wifi">key_shared_rutina_wifi</string>
 </resources>

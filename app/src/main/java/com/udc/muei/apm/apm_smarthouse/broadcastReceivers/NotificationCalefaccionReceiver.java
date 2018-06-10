@@ -48,17 +48,17 @@ public class NotificationCalefaccionReceiver extends BroadcastReceiver {
                     if (actionType == Constants.ACTIONS_NOTIFICATIONS.YES) {
                         Toast.makeText(context, "Se ha iniciado el proceso para enviar al servidor la petición de APAGAR la calefacción", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Se ha iniciado el proceso para enviar al servidor la petición de APAGAR la calefacción");
-                        cancelNotificacion(context, Constants.NOTIFICATION_ID);
+                        cancelNotificacion(context, Constants.CALEFACCION_NOTIFICATION_ID);
                     } else if (actionType == Constants.ACTIONS_NOTIFICATIONS.NO) {
-                        cancelNotificacion(context, Constants.NOTIFICATION_ID);
+                        cancelNotificacion(context, Constants.CALEFACCION_NOTIFICATION_ID);
                     }
                 } else if (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER) {
                     if (actionType == Constants.ACTIONS_NOTIFICATIONS.YES) {
                         Toast.makeText(context, "Iniciado el proceso para enviar al servidor la petición de ENCENDER la calefaccióne", Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Iniciado el proceso para enviar al servidor la petición de ENCENDER la calefacción");
-                        cancelNotificacion(context, Constants.NOTIFICATION_ID);
+                        cancelNotificacion(context, Constants.CALEFACCION_NOTIFICATION_ID);
                     } else if (actionType == Constants.ACTIONS_NOTIFICATIONS.NO) {
-                        cancelNotificacion(context, Constants.NOTIFICATION_ID);
+                        cancelNotificacion(context, Constants.CALEFACCION_NOTIFICATION_ID);
                     }
                 }
             }
@@ -121,6 +121,6 @@ public class NotificationCalefaccionReceiver extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(CHANNEL_ID); // Channel ID
         }
-        mNotificationManager.notify(Constants.NOTIFICATION_ID, builder.build());
+        mNotificationManager.notify(Constants.CALEFACCION_NOTIFICATION_ID, builder.build());
     }
 }
