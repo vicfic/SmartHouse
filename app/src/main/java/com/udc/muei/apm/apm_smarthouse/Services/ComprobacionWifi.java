@@ -13,19 +13,44 @@ import android.os.Messenger;
 import android.util.Log;
 import android.widget.Toast;
 //FIXME WIFI: arreglar este servicio para que funcione independientemente de la activity
-public class ServicioWifi extends Service {
+public class ComprobacionWifi extends Service {
 
-    public ServicioWifi() {
+    private static String LOG_COMPROBACION_WIFI_TAG = "ComprobacionWifi";
+    public static final int MSG_SAY_HELLO = 1;
+    final Messenger mMessenger = new Messenger(new IncomingHandler());
+
+    public class MyBinder extends Binder {
+        public ComprobacionWifi getService() {
+            return ComprobacionWifi.this;
+        }
+    }
+
+    class IncomingHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_SAY_HELLO:
+                    Toast.makeText(getApplicationContext(), "hello!", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    super.handleMessage(msg);
+            }
+        }
+    }
+
+    public ComprobacionWifi() {
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        Log.d(LOG_COMPROBACION_WIFI_TAG, "in onBind");
+        return mMessenger.getBinder();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.d(LOG_COMPROBACION_WIFI_TAG, "in onCreate");
     }
 
     @Override
@@ -43,7 +68,7 @@ public class ServicioWifi extends Service {
         } else {
             Toast.makeText(contex, "El WiFi está desactivado", Toast.LENGTH_LONG).show(); //WiFi desconectado
         }
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Override
@@ -52,5 +77,17 @@ public class ServicioWifi extends Service {
         Intent intent = new Intent();
         intent.setAction("com.udc.muei.apm.apm_smarthouse.Services.COMPROBACION_LOCALIZACION_DESTROY");
         sendBroadcast(intent);
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(LOG_COMPROBACION_WIFI_TAG, "in onUnbind");
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        Log.d(LOG_COMPROBACION_WIFI_TAG, "in onRebind");
+        super.onRebind(intent);
     }
 }

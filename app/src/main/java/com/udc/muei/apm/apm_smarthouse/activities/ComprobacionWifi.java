@@ -14,9 +14,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.udc.muei.apm.apm_smarthouse.R;
-import com.udc.muei.apm.apm_smarthouse.Services.ServicioWifi;
 import com.udc.muei.apm.apm_smarthouse.util.Constants;
-import com.udc.muei.apm.apm_smarthouse.util.NetworkHelper;
+import com.udc.muei.apm.apm_smarthouse.broadcastReceivers.NotificationWifiReceiver;
 
 public class ComprobacionWifi extends AppCompatActivity {
 
@@ -30,7 +29,7 @@ public class ComprobacionWifi extends AppCompatActivity {
         setContentView(R.layout.activity_comprobacion_wifi);
 
 //        fixme WIFI: llamada al servicio de comprobación de wifi
-        startService(new Intent(ComprobacionWifi.this,ServicioWifi.class));
+        startService(new Intent(ComprobacionWifi.this, com.udc.muei.apm.apm_smarthouse.Services.ComprobacionWifi.class));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.comprobacion_wifi_toolbar);
 
@@ -42,7 +41,7 @@ public class ComprobacionWifi extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        isWifiActive = NetworkHelper.checkWifiOnAndConnected(getApplicationContext()) != 0;
+        isWifiActive = NotificationWifiReceiver.checkWifiOnAndConnected(getApplicationContext()) != 0;
 
 
         /** Configuración del checkbox de opción automática*/
@@ -66,7 +65,7 @@ public class ComprobacionWifi extends AppCompatActivity {
         intentFilter.addAction(WifiManager.EXTRA_SUPPLICANT_CONNECTED);
         intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         intentFilter.addAction(WifiManager.EXTRA_NEW_STATE);
-        registerReceiver(new NetworkHelper(), intentFilter);
+        registerReceiver(new NotificationWifiReceiver(), intentFilter);
 
     }
 

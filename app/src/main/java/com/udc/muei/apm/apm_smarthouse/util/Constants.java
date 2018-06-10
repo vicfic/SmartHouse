@@ -21,6 +21,7 @@ public class Constants {
     public static final String NOTIFICACION_TRANSITION_KEY = PACKAGE_NAME + ".NOTIFICACION_TRANSITION_KEY";
     public static final String NOTIFICACION_TRANSITION_ACTION_KEY = PACKAGE_NAME + ".NOTIFICACION_TRANSITION_ACTION_KEY";
     public static final String GEOFENCES_ADDED_KEY = PACKAGE_NAME + ".GEOFENCES_ADDED_KEY";
+    public static final String WIFI_ADDED_KEY = PACKAGE_NAME + ".WIFI_ADDED_KEY";
     public static final String RADIUS_KEY = PACKAGE_NAME + ".RADIUS_KEY";
     public static final String OPTION_AUTO_CALEFACCION_KEY = PACKAGE_NAME + ".OPTION_AUTO_CALEFACCION_KEY";
     public static final String LOCATION_LAT_HOME_KEY = PACKAGE_NAME + ".LOCATION_LAT_HOME_KEY";

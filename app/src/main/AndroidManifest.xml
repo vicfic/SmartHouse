@@ -48,13 +48,8 @@
         <activity android:name=".activities.ComprobacionGPS" />
         <activity android:name=".activities.ComprobacionWifi" />
 
-        <receiver
-            android:name=".util.NetworkHelper"
-            android:enabled="true"
-            android:exported="true" />
-
         <service
-            android:name=".Services.ServicioWifi"
+            android:name=".Services.ComprobacionWifi"
             android:enabled="true"
             android:exported="true" />
 
@@ -86,6 +81,11 @@
 
         <receiver
             android:name=".broadcastReceivers.NotificationCalefaccionReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".broadcastReceivers.NotificationWifiReceiver"
             android:enabled="true"
             android:exported="true" />
 

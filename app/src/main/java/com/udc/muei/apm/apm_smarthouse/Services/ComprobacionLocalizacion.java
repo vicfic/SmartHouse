@@ -16,7 +16,13 @@ public class ComprobacionLocalizacion extends Service {
     public static final int MSG_SAY_HELLO = 1;
     private IBinder mBinder = new ComprobacionLocalizacion.MyBinder();
 
+    final Messenger mMessenger = new Messenger(new IncomingHandler());
 
+    public class MyBinder extends Binder {
+        public ComprobacionLocalizacion getService() {
+            return ComprobacionLocalizacion.this;
+        }
+    }
 
 
     public ComprobacionLocalizacion() {
@@ -72,14 +78,6 @@ public class ComprobacionLocalizacion extends Service {
                 default:
                     super.handleMessage(msg);
             }
-        }
-    }
-
-    final Messenger mMessenger = new Messenger(new IncomingHandler());
-
-    public class MyBinder extends Binder {
-        public ComprobacionLocalizacion getService() {
-            return ComprobacionLocalizacion.this;
         }
     }
 }

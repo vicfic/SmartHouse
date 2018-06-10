@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.Services.ComprobacionLocalizacion;
+import com.udc.muei.apm.apm_smarthouse.Services.ComprobacionWifi;
 
 public class initMobileReceiver extends BroadcastReceiver {
     public static String TAG_INIT_MOBILE_RECEIVER = "initMobileReceiver";
@@ -23,6 +24,11 @@ public class initMobileReceiver extends BroadcastReceiver {
         Boolean rutinaCalefaccion = sharedPref.getBoolean(context.getString(R.string.key_shared_rutina_calefaccion), false);
         if (rutinaCalefaccion){
             Intent intentService = new Intent(context, ComprobacionLocalizacion.class);
+            context.startService(intentService);
+        }
+        Boolean rutinaWifi = sharedPref.getBoolean(context.getString(R.string.key_shared_rutina_wifi), false);
+        if (rutinaWifi){
+            Intent intentService = new Intent(context, ComprobacionWifi.class);
             context.startService(intentService);
         }
     }

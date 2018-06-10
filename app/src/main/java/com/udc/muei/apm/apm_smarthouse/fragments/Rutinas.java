@@ -89,7 +89,13 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
                 rutineCalefaccionONOFF(isChecked);
             }
         }));
-        routineArray.add(new Routine("Televisor", false, new Intent(getContext(), ComprobacionWifi.class)));
+        routineArray.add(new Routine("Wifi", PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(
+                Constants.WIFI_ADDED_KEY, false), new Intent(getContext(), ComprobacionWifi.class), new RutineHandlerONOFF() {
+            @Override
+            public void onSwitchClick(boolean isChecked) {
+                rutineWifiONOFF(isChecked);
+            }
+        }));
         routineArray.add(new Routine("Desumificador", true));
         /******************************************************************************************/
 
@@ -119,6 +125,20 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
         });
         setListAdapter(routineAdapter);
     }
+
+    /********************** FUNCIONES ON/OFF rutina wifi ***********************************/
+
+    private void rutineWifiONOFF(Boolean  isChecked){
+        Log.d(TAG, isChecked?"activado":"desactivado");
+
+        // We save the rutine on the preferences so that we see the state saved everytime we open the app
+        PreferenceManager.getDefaultSharedPreferences(getActivity())
+                .edit()
+                .putBoolean(Constants.WIFI_ADDED_KEY, isChecked)
+                .apply();
+    }
+
+    /***************** FIN  FUNCIONES ON/OFF rutina wifi ***********************************/
 
     /********************** FUNCIONES ON/OFF rutina calefaccion ***********************************/
 

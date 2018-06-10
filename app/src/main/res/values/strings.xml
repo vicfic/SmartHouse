@@ -170,4 +170,7 @@
     <string name="cancel_eula">Rechazar</string>
     <string name="agree_eula">Aceptar</string>
     <string name="eula_subtitulo">Términos y condiciones</string>
+    <string name="title_notification_auto_ON_wifi">Rutina Wifi</string>
+    <string name="msg_notification_auto_ON_wifi">Se ha enviado una petición al sistema SmartHouse para apagar las luces automáticamente</string>
+    <string name="key_shared_rutina_wifi">key_shared_rutina_wifi</string>
 </resources>
