@@ -1,13 +1,14 @@
 package com.udc.muei.apm.apm_smarthouse.AsyncTasks;
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.interfaces.HttpsRequestResult;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -38,23 +39,22 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by José Manuel González on 23/03/2018.
+ *
+ * REVISADA: José Manuel González on 10/06/2018.
  */
 
 public class HttpsRequestAsyncTask extends AsyncTask<String, Void, String> {
 
-    private static final String GET_TAG = "GET USUARIOS";
+    private static final String GET_TAG = "GET ASYCK TASK";
 
     public HttpsRequestResult mListener = null;
-    private ProgressDialog pdia;
-
+    private Context mContext;
 
     private static final HostnameVerifier DUMMY_VERIFIER = new HostnameVerifier() {
         public boolean verify(String hostname, SSLSession session) {
             return true;
         }
     };
-
-    private Context mContext;
 
     public HttpsRequestAsyncTask(Context context, HttpsRequestResult interfaz) {
         mListener = interfaz;
@@ -64,18 +64,6 @@ public class HttpsRequestAsyncTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
-        pdia = new ProgressDialog(mContext , R.style.MyAlertDialogStyle);
-
-
-        //pdia.setTitle("Cargando...");
-        //pdia.setProgressStyle(R.style.MyAlertDialogStyle);
-        pdia.setCancelable(false);
-        //pdia.setIcon(android.R.drawable.btn_plus);
-        pdia.setMessage("Cargando...");
-        pdia.show();
-        Log.d(GET_TAG,"<--> OnPreExecute <-->");
-
         // Dummy trust manager that trusts all certificates
         TrustManager localTrustmanager = new X509TrustManager() {
 
@@ -111,76 +99,93 @@ public class HttpsRequestAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... params) {
-        pdia.show();
-
         try {
-            // This is getting the url from the string we passed in
             List<String> session = null;
             HttpsURLConnection writeConn;
-            Log.d(GET_TAG,"Token---->"+params[0]);
 
-
-            //URL url = new URL("https://192.168.43.76:8000/SmartHouse/");
-            URL url = new URL("https://192.168.0.25:8000/login/");
-
-            writeConn = (HttpsURLConnection) url.openConnection();
-
+            String ruta = params[0];
+            String parametros = params[1];
 
             try {
-                //Estableciendo propiedades de la conexión
-                writeConn.setRequestProperty("X-CSRF-Token", "Fetch");
-                writeConn.setRequestMethod("POST");  //Cambiar esto para GET o POST
-                writeConn.setDoOutput(true);
-                writeConn.setDoInput(true);
-                writeConn.setRequestProperty("USER_AGENT","Mozilla/5.0");
-                writeConn.setRequestProperty("ACCEPT-LANGUAGE","en-US,en;0.5");
-                //writeConn.addRequestProperty("REFERER", "https://192.168.43.76:8000/"); //Cambiar esto con la dirección del servidor (get preferences)
-                writeConn.addRequestProperty("REFERER", "https://192.168.0.25:8000/"); //Cambiar esto con la dirección del servidor (get preferences)
-                writeConn.setHostnameVerifier(DUMMY_VERIFIER);
-                //session = getSessionCookies(writeConn);
-                setSessionCookies(writeConn, session); // set request header "cookie"
-                writeConn.connect();
+                JSONObject parametrosJSON = new JSONObject(parametros);
+                Log.d(GET_TAG,"Parametros:  "+parametrosJSON);
 
-                //Steam de salida (Si la petición el PUT)
-                DataOutputStream dOut = new DataOutputStream(writeConn.getOutputStream());
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(dOut, "UTF-8"));
-                JSONObject jsonEnv = new JSONObject();
-                jsonEnv.put("tokenId",params[0]);
-                writer.write(jsonEnv.toString());  // Escribir aqui la info en formato JSON
-                writer.flush();
-                writer.close();
+                //Recopilación de Dirección IP y Puerto del servidor
+                SharedPreferences sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
+                String ip_serv = sharedPref.getString(mContext.getString(R.string.key_shared_IP), mContext.getString(R.string.default_value_IP));
+                String port_serv = sharedPref.getString(mContext.getString(R.string.key_shared_port), mContext.getString(R.string.default_value_port));
 
-                //Stream de entrada para la respuesta (tanto GET como POST)
-                dOut.close();
-                InputStream in = new BufferedInputStream(writeConn.getInputStream());
+                //Construcción de la ruta a la API
+                URL url = new URL("https://"+ip_serv+":"+port_serv+"/"+ruta);
+                Log.d(GET_TAG,"Ruta al servidor:  "+url);
 
-                String s = readStream(in);
+                //Creación de la conexión
+                writeConn = (HttpsURLConnection) url.openConnection();
 
-                JSONObject json = new JSONObject(s);
-                String result = json.getString("message");
-                Log.d(GET_TAG,"Cambiando   RESULT -->"+json.toString());
-                in.close();
+                try {
+                    //Estableciendo propiedades de la conexión
+                    writeConn.setRequestProperty("X-CSRF-Token", "Fetch");
+                    writeConn.setRequestMethod("POST");  //Cambiar esto para GET o POST
+                    writeConn.setDoOutput(true);
+                    writeConn.setDoInput(true);
+                    writeConn.setConnectTimeout(3500); //Timeout para la conexion de 5 segundos;
+                    writeConn.setRequestProperty("USER_AGENT","Mozilla/5.0");
+                    writeConn.setRequestProperty("ACCEPT-LANGUAGE","en-US,en;0.5");
+                    writeConn.addRequestProperty("REFERER", "https://+"+ip_serv+":"+port_serv+"/"); //Cambiar esto con la dirección del servidor (get preferences)
+                    writeConn.setHostnameVerifier(DUMMY_VERIFIER);
 
-                return json.toString();
+                    setSessionCookies(writeConn, session); // set request header "cookie"
 
+                    writeConn.connect();
 
-            } finally {
-                writeConn.disconnect();
+                    //Steam de salida
+                    DataOutputStream dOut = new DataOutputStream(writeConn.getOutputStream());
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(dOut, "UTF-8"));
+                    writer.write(parametrosJSON.toString());  //Informacion en JSON
+                    writer.flush();
+                    writer.close();
+
+                    //Stream de entrada para la respuesta
+                    dOut.close();
+                    InputStream in = new BufferedInputStream(writeConn.getInputStream());
+                    String respuesta = readStream(in);
+                    in.close();
+
+                    return respuesta;
+
+                } catch (Throwable t) {
+                    Log.e(GET_TAG, "Respuesta malformada.");
+                    JSONObject error = new JSONObject();
+                    error.put("Error",1);
+                    return error.toString();
+                } finally {
+                    writeConn.disconnect();
+                }
+
+            } catch (Throwable t) {
+                Log.e(GET_TAG, "No se puede parsear la información de entrada: \"" + parametros + "\"");
+                JSONObject error = new JSONObject();
+                error.put("Error",1);
+                return error.toString();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        JSONObject error = new JSONObject();
+        try {
+            error.put("Error",1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return error.toString();
     }
 
     protected void onPostExecute(String result){
-        //super.onPostExecute(result);
-
-        Log.d(GET_TAG,"<--> OnPostExecute <-->");
-        pdia.dismiss();
+        //Retorno de resultado de la conexión
+        Log.d(GET_TAG,"Resultado de la conexión: \""+result+"\"");
         mListener.processFinish(result);
-
     }
 
     private String readStream(InputStream in) {

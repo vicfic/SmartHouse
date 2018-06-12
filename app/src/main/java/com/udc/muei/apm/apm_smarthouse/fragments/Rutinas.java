@@ -4,11 +4,16 @@ package com.udc.muei.apm.apm_smarthouse.fragments;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Messenger;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -18,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -28,31 +34,76 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.udc.muei.apm.apm_smarthouse.AsyncTasks.HttpsRequestAsyncTask;
 import com.udc.muei.apm.apm_smarthouse.BuildConfig;
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.Services.BoundService;
 import com.udc.muei.apm.apm_smarthouse.activities.ComprobacionGPS;
 import com.udc.muei.apm.apm_smarthouse.activities.ComprobacionWifi;
 import com.udc.muei.apm.apm_smarthouse.activities.Luces;
+import com.udc.muei.apm.apm_smarthouse.adapters.BeaconAdapter;
 import com.udc.muei.apm.apm_smarthouse.adapters.RoutineAdapter;
 import com.udc.muei.apm.apm_smarthouse.broadcastReceivers.GeofenceBroadcastReceiver;
+import com.udc.muei.apm.apm_smarthouse.interfaces.HttpsRequestResult;
 import com.udc.muei.apm.apm_smarthouse.interfaces.RoutineListClicksListeners;
 import com.udc.muei.apm.apm_smarthouse.interfaces.RutineHandlerONOFF;
+import com.udc.muei.apm.apm_smarthouse.model.BeaconCustom;
 import com.udc.muei.apm.apm_smarthouse.model.Routine;
+import com.udc.muei.apm.apm_smarthouse.util.BeaconsBDHandler;
 import com.udc.muei.apm.apm_smarthouse.util.Constants;
 import com.udc.muei.apm.apm_smarthouse.util.GeofenceErrorMessages;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class Rutinas extends android.support.v4.app.ListFragment implements AdapterView.OnItemClickListener {
+import static com.udc.muei.apm.apm_smarthouse.util.Constants.MAP_PETICIONES;
+
+public class Rutinas extends ParentFragment implements AdapterView.OnItemClickListener {
 
     private static final String TAG = Rutinas.class.getSimpleName();
 
     private static RoutineAdapter routineAdapter;
     private ArrayList<Routine> routineArray;
 
+    /** Messenger for communicating with the service. */
+    Messenger mService = null;
+
+    /** Flag indicating whether we have called bind on the service. */
+    boolean mBound;
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // This is called when the connection with the service has been
+            // established, giving us the object we can use to
+            // interact with the service.  We are communicating with the
+            // service using a Messenger, so here we get a client-side
+            // representation of that from the raw IBinder object.
+            mService = new Messenger(service);
+            mBound = true;
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            // This is called when the connection with the service has been
+            // unexpectedly disconnected -- that is, its process crashed.
+            mService = null;
+            mBound = false;
+        }
+    };
+
 
     /************************** Variables para la rutina de calefaccion****************************/
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+
+    @Override
+    public void update() {
+        //No hace nada en este fragmento el botón refresh
+    }
+
     //Operaciones disponibles
     private enum PendingGeofenceTask {
         ADD, REMOVE, NONE
@@ -69,7 +120,6 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -83,7 +133,13 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
         /******************************************************************************************/
         /* Esta información está introducida manualmente de momento, a posterior, estos datos serán
         enviados por el servidor */
-        routineArray.add(new Routine("Luces", true, new Intent(getContext(), Luces.class)));
+        routineArray.add(new Routine("Luces", PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(
+                Constants.BEACONS_ADDED_KEY, false), new Intent(getContext(), Luces.class), new RutineHandlerONOFF() {
+            @Override
+            public void onSwitchClick(boolean isChecked) {
+                rutineLucesONOFF(isChecked);
+            }
+        }));
         routineArray.add(new Routine("Calefacción", PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(
                 Constants.GEOFENCES_ADDED_KEY, false), new Intent(getContext(), ComprobacionGPS.class), new RutineHandlerONOFF() {
             @Override
@@ -98,7 +154,6 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
                 rutineWifiONOFF(isChecked);
             }
         }));
-        routineArray.add(new Routine("Desumificador", true));
         /******************************************************************************************/
 
         routineAdapter= new RoutineAdapter(routineArray, getContext(), new RoutineListClicksListeners() {
@@ -129,6 +184,104 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
         });
         setListAdapter(routineAdapter);
     }
+
+
+
+    public void rutineLucesONOFF(Boolean isChecked){
+        if (isChecked)
+            addBeacons();
+        else{
+            Intent intent = new Intent(getContext(), BoundService.class);
+            getContext().stopService(intent);
+        }
+    }
+    public void addBeacons(){
+        SharedPreferences sharedPref = getContext().getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(Constants.FLAG_NOTIFICATION_LIGTHS, -1);
+        editor.apply();
+
+        JSONObject parametrosPeticion = new JSONObject();
+
+        final LoadToast lt = new LoadToast(getContext());
+
+        try {
+            lt.show();
+            lt.setText("Cargando Beacons");
+            lt.setTranslationY(1400);
+            lt.setTextColor(getResources().getColor(R.color.naranja_oscuro)).setProgressColor(getResources().getColor(R.color.naranja_claro));
+
+            parametrosPeticion.put("tokenId", sharedPref.getString(getString(R.string.key_token_id),""));
+            HttpsRequestAsyncTask task = new HttpsRequestAsyncTask(getContext(), new HttpsRequestResult() {
+                @Override
+                public void processFinish(String result){
+
+                    try {
+                        Log.d(TAG, result);
+                        JSONObject resultJSON = new JSONObject(result);
+
+                        if (resultJSON.getBoolean("error")){
+                            if (resultJSON.getBoolean("forbidden")){
+                                //buttonView.setChecked(last_state);
+                                Toast.makeText(getContext()," No tiene permiso para realizar la acción", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getContext()," Error durante la conexión", Toast.LENGTH_SHORT).show();
+                            }
+                            lt.error();
+                            lt.hide();
+                        }else{
+                            //Recuperamos los beacons y los añadimos a una base de datos, Ademas iniciamos el servicio de comprobacion de beacons
+                            Log.d(TAG, result);
+                            JSONArray beacons = resultJSON.getJSONArray("beacons");
+                            ArrayList beaconArray = new ArrayList<>();
+                            for (int i = 0; i < beacons.length(); i++) {
+                                JSONObject beaconsJSONObject = beacons.getJSONObject(i);
+                                String uuid = beaconsJSONObject.getString("uuid");
+                                String grupoid = beaconsJSONObject.getString("grupoId");
+                                String beaconid = beaconsJSONObject.getString("beaconId");
+                                int lugarId = beaconsJSONObject.getInt("lugarId");
+                                int rango = beaconsJSONObject.getInt("rango");
+                                String nombre_lugar = beaconsJSONObject.getString("nombreLugar");
+                                BeaconCustom beaconCustom = new BeaconCustom(-1, uuid, grupoid, beaconid, lugarId, rango, nombre_lugar, 0);
+                                beaconArray.add(beaconCustom);
+                            }
+
+
+                            //dbHandler.deleteTable();
+                            BeaconsBDHandler dbHandler = new BeaconsBDHandler(getContext(),null,null,1);
+                            dbHandler.deleteBeacons();
+                            dbHandler.addBeacons(beaconArray);
+
+
+                            Intent intent = new Intent(getContext(), BoundService.class);
+                            getContext().startService(intent);
+                            lt.success();
+                            lt.hide();
+                            updateBeaconsAdded(true);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        lt.hide();
+                    }
+                }
+            });
+
+            task.execute(MAP_PETICIONES.get("ObtenerBeacons"), parametrosPeticion.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            lt.hide();
+        }
+    }
+    private void updateBeaconsAdded(boolean added) {
+        PreferenceManager.getDefaultSharedPreferences(getContext())
+                .edit()
+                .putBoolean(Constants.BEACONS_ADDED_KEY, added)
+                .apply();
+    }
+
+
 
     /********************** FUNCIONES ON/OFF rutina wifi ***********************************/
 
@@ -484,6 +637,7 @@ public class Rutinas extends android.support.v4.app.ListFragment implements Adap
             removeGeofences();
         }
     }
+
     /***************** FIN  FUNCIONES ON/OFF rutina calefaccion ***********************************/
 
     @Override

@@ -5,17 +5,14 @@ import android.os.Parcelable;
 
 /**
  * Created by José Manuel González on 15/03/2018.
+ *
+ * REVISADA: José Manuel González on 10/06/2018.
  */
 
 public class Lugar implements Parcelable {
     private String name;
     private int idDjangoLugar;
     String photoUrl;
-
-    public Lugar(String name, int idDjango) {
-        this.name = name;
-        this.idDjangoLugar = idDjango;
-    }
 
     public Lugar(String name, int idDjangoLugar, String photoUrl) {
         this.name = name;
@@ -48,11 +45,15 @@ public class Lugar implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(idDjangoLugar);
         dest.writeString(name);
+        dest.writeString(photoUrl);
+        dest.writeInt(idDjangoLugar);
     }
 
     private Lugar (Parcel in){
         this.idDjangoLugar = in.readInt();
         this.name = in.readString();
+        this.photoUrl = in.readString();
+        this.idDjangoLugar = in.readInt();
     }
 
     public static final Parcelable.Creator<Lugar> CREATOR = new Creator<Lugar>() {

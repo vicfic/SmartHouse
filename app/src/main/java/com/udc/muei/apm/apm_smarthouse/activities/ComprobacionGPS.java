@@ -61,13 +61,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
+/**
+ * REVISADA: José Manuel González on 12/06/2018.
+ */
+
 public class ComprobacionGPS extends AppCompatActivity implements OnCompleteListener<Void>, OnMapReadyCallback {
 
     private static final String TAG = ComprobacionGPS.class.getSimpleName();
 
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
-
-
 
 
     //Operaciones disponibles

@@ -1,5 +1,6 @@
 package com.udc.muei.apm.apm_smarthouse.Services;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,6 +25,10 @@ import java.util.List;
 
 import com.udc.muei.apm.apm_smarthouse.broadcastReceivers.NotificationCalefaccionReceiver;
 import com.udc.muei.apm.apm_smarthouse.util.*;
+
+/**
+ * REVISADA: José Manuel González on 11/06/2018.
+ */
 
 public class GeofenceRegistrationService extends JobIntentService {
 
@@ -163,6 +168,7 @@ public class GeofenceRegistrationService extends JobIntentService {
             builder.addAction(R.drawable.explosion, getString(R.string.button_notification_YES), buttonsActionPendingIntent_YES)
                     .addAction(R.drawable.fire, getString(R.string.button_notification_NO), buttonsActionPendingIntent_NO)
                     .setContentIntent(notificationPendingIntent)
+                    .setDefaults(Notification.DEFAULT_ALL)
                     .setContentText(getString(R.string.geofence_transition_notification_text_OFF));
         }else if (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER) {
             if (!auto_on) {
@@ -175,6 +181,7 @@ public class GeofenceRegistrationService extends JobIntentService {
                 builder.addAction(R.drawable.fire, getString(R.string.button_notification_YES), buttonsActionPendingIntent_YES)
                         .addAction(R.drawable.explosion, getString(R.string.button_notification_NO), buttonsActionPendingIntent_NO)
                         .setContentIntent(notificationPendingIntent)
+                        .setDefaults(Notification.DEFAULT_ALL)
                         .setContentText(getString(R.string.geofence_transition_notification_text_ON));
             }else{
                 intent1 = new Intent(this, NotificationCalefaccionReceiver.class);
@@ -183,8 +190,6 @@ public class GeofenceRegistrationService extends JobIntentService {
                 sendBroadcast(intent1);
             }
         }
-
-
 
         // Set the Channel ID for Android O.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

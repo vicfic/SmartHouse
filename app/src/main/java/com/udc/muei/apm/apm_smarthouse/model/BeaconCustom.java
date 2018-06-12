@@ -9,53 +9,67 @@ import android.os.Parcelable;
 
 public class BeaconCustom implements Parcelable {
 
-    private Double distance;
+    private int distance;
     private String uuid;
     private String idGrupo;
     private String idBeacon;
-    private String bluetoothName;
-    private String bluetoothAddress;
-    private Double averageRssi;
-    private int rssi;
-    private Double distanciaRango;
+    private int lugarId = -1;
+    private int distanciaRango = 0;
+    private String nombre_lugar;
+    private int notificado = 0;
 
-
-    public BeaconCustom(Double distance, String id1, String id2, String id3, String bluetoothName, String bluetoothAddress, Double averageRssi, int rssi, Double distanciaRango) {
-        this.distance = distance;
-        this.uuid = id1;
-        this.idGrupo = id2;
-        this.idBeacon = id3;
-        this.bluetoothName = bluetoothName;
-        this.bluetoothAddress = bluetoothAddress;
-        this.averageRssi = averageRssi;
-        this.rssi = rssi;
-        this.distanciaRango = distanciaRango;
+    public int getLugarId() {
+        return lugarId;
     }
 
-    public Double getDistance() {
+    public void setLugarId(int lugarId) {
+        this.lugarId = lugarId;
+    }
+
+    public BeaconCustom(int distance, String uuid, String grupoid, String beaconid, int lugarId, int distanciaRango, String nombre_lugar, int notificado) {
+        this.distance = distance;
+
+        this.uuid = uuid;
+        this.idGrupo = grupoid;
+        this.idBeacon = beaconid;
+        this.lugarId = lugarId;
+        this.distanciaRango = distanciaRango;
+        this.nombre_lugar = nombre_lugar;
+        this.notificado = notificado;
+    }
+
+    public int getDistance() {
         return distance;
     }
     public String getUuid() {
         return uuid;
     }
 
-    public Double getDistanciaRango() {
+    public String getNombre_lugar() {
+        return nombre_lugar;
+    }
+
+    public void setNombre_lugar(String nombre_lugar) {
+        this.nombre_lugar = nombre_lugar;
+    }
+
+    public int getNotificado() {
+        return notificado;
+    }
+
+    public void setNotificado(int notificado) {
+        this.notificado = notificado;
+    }
+
+    public int getDistanciaRango() {
         return distanciaRango;
     }
 
-    public void setDistance(Double distance) {
+    public void setDistance(int distance) {
         this.distance = distance;
     }
 
-    public void setAverageRssi(Double averageRssi) {
-        this.averageRssi = averageRssi;
-    }
-
-    public void setRssi(int rssi) {
-        this.rssi = rssi;
-    }
-
-    public void setDistanciaRango(Double distanciaRango) {
+    public void setDistanciaRango(int distanciaRango) {
         this.distanciaRango = distanciaRango;
     }
 
@@ -67,22 +81,6 @@ public class BeaconCustom implements Parcelable {
         return idBeacon;
     }
 
-    public String getBluetoothName() {
-        return bluetoothName;
-    }
-
-    public String getBluetoothAddress() {
-        return bluetoothAddress;
-    }
-
-    public Double getAverageRssi() {
-        return averageRssi;
-    }
-
-    public int getRssi() {
-        return rssi;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -90,27 +88,25 @@ public class BeaconCustom implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeDouble(this.distance);
+        dest.writeInt(this.distance);
         dest.writeString(this.uuid);
         dest.writeString(this.idGrupo);
         dest.writeString(this.idBeacon);
-        dest.writeString(this.bluetoothName);
-        dest.writeString(this.bluetoothAddress);
-        dest.writeDouble(this.averageRssi);
-        dest.writeInt(this.rssi);
-        dest.writeDouble(this.distanciaRango);
+        dest.writeInt(this.distanciaRango);
+        dest.writeInt(this.lugarId);
+        dest.writeString(this.nombre_lugar);
+        dest.writeInt(this.notificado);
     }
 
     private BeaconCustom(Parcel in){
-        this.distance = in.readDouble();
+        this.distance = in.readInt();
         this.uuid = in.readString();
         this.idGrupo = in.readString();
         this.idBeacon = in.readString();
-        this.bluetoothName = in.readString();
-        this.bluetoothAddress = in.readString();
-        this.averageRssi = in.readDouble();
-        this.rssi = in.readInt();
-        this.distanciaRango = in.readDouble();
+        this.distanciaRango = in.readInt();
+        this.lugarId = in.readInt();
+        this.nombre_lugar = in.readString();
+        this.notificado = in.readInt();
     }
 
 

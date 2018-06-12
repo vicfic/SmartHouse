@@ -5,17 +5,15 @@ import android.os.Parcelable;
 
 /**
  * Created by José Manuel González on 14/03/2018.
+ *
+ * REVISADA: José Manuel González on 11/06/2018.
  */
 
 public class UsuarioLight implements Parcelable{
-    int idUsuarioDjango;
-    String name;
-    String photoUrl;
+    private int idUsuarioDjango;
+    private String name;
+    private String photoUrl;
 
-    public UsuarioLight(int idUsuarioDjango, String name) {
-        this.idUsuarioDjango = idUsuarioDjango;
-        this.name = name;
-    }
 
     public UsuarioLight(int idUsuarioDjango, String name, String photoUrl) {
         this.idUsuarioDjango = idUsuarioDjango;
@@ -56,11 +54,13 @@ public class UsuarioLight implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(idUsuarioDjango);
         dest.writeString(name);
+        dest.writeString(photoUrl);
     }
 
     private UsuarioLight(Parcel in){
         this.idUsuarioDjango = in.readInt();
         this.name = in.readString();
+        this.photoUrl = in.readString();
     }
 
     public static final Parcelable.Creator<UsuarioLight> CREATOR = new Creator<UsuarioLight>() {

@@ -8,8 +8,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_login_2">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/luces_toolbar"
@@ -20,41 +21,12 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ToolbarTheme" />
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp">
-
-        <Button
-            android:id="@+id/start_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_centerHorizontal="true"
-            android:text="Start Scanning Beacons Service" />
-
-        <Button
-            android:id="@+id/stop_service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/start_service"
-            android:layout_weight="2"
-            android:layout_centerHorizontal="true"
-            android:text="Stop Scanning Beacons Service" />
-    </LinearLayout>
-
-
-
     <ListView
         android:id="@+id/list_beacons"
         android:layout_width="match_parent"
         android:layout_below="@+id/stop_service"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+       ></ListView>
 
 
     </LinearLayout>

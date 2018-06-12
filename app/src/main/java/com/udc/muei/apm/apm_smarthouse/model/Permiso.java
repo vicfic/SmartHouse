@@ -2,6 +2,8 @@ package com.udc.muei.apm.apm_smarthouse.model;
 
 /**
  * Created by José Manuel González on 14/03/2018.
+ *
+ * REVISADA: José Manuel González on 11/06/2018.
  */
 
 public class Permiso {

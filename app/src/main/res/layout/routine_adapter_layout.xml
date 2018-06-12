@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:longClickable="true">
+    android:longClickable="true"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/routine_name_adapter"
@@ -13,8 +14,9 @@
         android:layout_weight="1"
         android:paddingRight="6dp"
         android:text="Marshmallow"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/routine_setting_adapter"
@@ -22,7 +24,7 @@
         android:layout_height="32dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="8dp"
-        android:background="@drawable/ic_more_horiz_black_24dp"
+        android:background="@drawable/baseline_more_horiz_white_24"
         android:gravity="center" />
 
     <Switch

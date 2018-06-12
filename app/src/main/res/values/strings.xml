@@ -14,6 +14,7 @@
     <string name="toolbar_menu_principal_name">Menú Principal</string>
     <string name="action_favorite">Favoritos</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_realiddAumentada">Realidad Aumentada</string>
     <string name="action_refresh">Actualizar</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -92,6 +93,11 @@
     <string name="key_eula_accepted">key_eula_accepted</string>
     <!-- Clave para eula aceptado -->
     <string name="key_eula_edited">key_eula_edited</string>
+    <!-- Clave para ID usuario en la BD Django -->
+    <string name="key_bd_django">usuario_id</string>
+    <!-- Clave para el token del usuario logueado -->
+    <string name="key_token_id">key_token_id</string>
+
 
     <!-- Valor por defecto si no está guardada ninguna IP-->
     <string name="default_value_IP"></string>
@@ -131,6 +137,9 @@
     <string name="button_notification_YES">Si</string>
     <string name="button_notification_NO">No</string>
 
+    <string name="button_notification_encender">Encender</string>
+    <string name="button_notification_apagar">Apagar</string>
+
     <!-- Transition type msg strings -->
     <string name="geofence_transition_entered_msg">Acercándose a casa.</string>
     <string name="geofence_transition_exited_msg">Alejándose de casa.</string>
@@ -140,8 +149,21 @@
     <string name="title_notification_auto_ON_calefaccion">Calefacción encendida automáticamente.</string>
     <string name="msg_notification_auto_ON_calefaccion">Se ha enviado una petición al sistema SmartHouse para encender la calefacción automáticamente.</string>
 
+    <string name="title_notification_auto_OFF_calefaccion">Calefacción apagada automáticamente.</string>
+    <string name="msg_notification_auto_OFF_calefaccion">Se ha enviado una petición al sistema SmartHouse para apagar la calefacción automáticamente.</string>
+
+    <string name="title_notification_ON_calefaccion">Calefacción encendida.</string>
+    <string name="msg_notification_ON_calefaccion">Se ha enviado una petición al sistema SmartHouse para encender la calefacción.</string>
+
+    <string name="title_notification_OFF_calefaccion">Calefacción apagada.</string>
+    <string name="msg_notification_OFF_calefaccion">Se ha enviado una petición al sistema SmartHouse para apagar la calefacción.</string>
+
     <string name="geofence_transition_notification_text_ON">¿Desea encender la calefacción?</string>
     <string name="geofence_transition_notification_text_OFF">¿Desea apagar la calefacción?</string>
+
+    <string name="lights_transition_notification_text">¿Desea apagar o encender luces?</string>
+
+    <string name="lights_transition_notification_text_ON">¿Desea encender luces?</string>
     <string name="lights_transition_notification_text_OFF">¿Desea apagar las luces?</string>
 
     <string name="unknown_geofence_error">
@@ -174,4 +196,10 @@
     <string name="title_notification_auto_ON_wifi">Rutina Wifi</string>
     <string name="msg_notification_auto_ON_wifi">Se ha enviado una petición al sistema SmartHouse para apagar las luces</string>
     <string name="key_shared_rutina_wifi">key_shared_rutina_wifi</string>
+
+
+
+
+
+    <string name="info_refresh">Información actualizada</string>
 </resources>

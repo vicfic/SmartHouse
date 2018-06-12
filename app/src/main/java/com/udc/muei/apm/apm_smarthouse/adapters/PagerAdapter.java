@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.udc.muei.apm.apm_smarthouse.R;
+import com.udc.muei.apm.apm_smarthouse.fragments.ParentFragment;
 import com.udc.muei.apm.apm_smarthouse.fragments.Usuarios;
 import com.udc.muei.apm.apm_smarthouse.fragments.Favoritos;
 import com.udc.muei.apm.apm_smarthouse.fragments.Lugares;
@@ -41,6 +42,15 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        ParentFragment parentFragment = (ParentFragment) object;
+        if (parentFragment!=null){
+            parentFragment.update();
+        }
+        return super.getItemPosition(object);
     }
 
     @Override

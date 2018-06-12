@@ -2,16 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="30pt"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/deviceName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingRight="8dp"
+        android:layout_marginStart="6dp"
         android:layout_weight="1"
-        android:textAppearance="@android:style/TextAppearance.Material"
         android:gravity="center_vertical"
+        android:paddingRight="6dp"
+        android:text="Marshmallow"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
         />
 
     <ImageButton android:id="@+id/favorite"

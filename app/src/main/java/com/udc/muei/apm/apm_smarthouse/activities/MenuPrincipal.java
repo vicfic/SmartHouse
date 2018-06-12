@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,8 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +34,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.PagerAdapter;
+import com.udc.muei.apm.apm_smarthouse.fragments.Favoritos;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+
 
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -54,9 +54,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBar actionBar;
     private TextView textView;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
+
 
     //Info de cuanta logueada
     private String nombre ;
@@ -64,23 +62,18 @@ public class MenuPrincipal extends AppCompatActivity {
     private String photo_url;
     private String token;
 
-    //Datos de usuario logeado
 
-
-    //Buttons needed for select current fragment
-    Button fragmentPlaces;
-    Button fragmentFav;
-    Button fragmentRut;
     GoogleSignInClient mGoogleSignInClient;
     ViewPager simpleViewPager;
     TabLayout tabLayout;
 
+    PagerAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
-        toolbar = (Toolbar) findViewById(R.id.menu_principal_toolbar);
+        toolbar = findViewById(R.id.menu_principal_toolbar);
         textView = findViewById(R.id.toolbar_menu_princiapl_titulo);
         toolbar.setTitle("");
 
@@ -94,21 +87,19 @@ public class MenuPrincipal extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        if (navigationView != null) {
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        if (navigationView != null)
             setupNavigationDrawerContent(navigationView);
-        }
 
         setupNavigationDrawerContent(navigationView);
 
-
         /* Configuración parte de fragmentos*/
-        simpleViewPager = (ViewPager) findViewById(R.id.visor_fragmentos);
-        tabLayout = (TabLayout) findViewById(R.id.selector_fragmento);
+        simpleViewPager = findViewById(R.id.visor_fragmentos);
+        tabLayout = findViewById(R.id.selector_fragmento);
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), this);
+        adapter = new PagerAdapter(getSupportFragmentManager(), this);
 
         for(int i=0; i<adapter.getNombresFragmentos().size();i++){
             if (i==0)
@@ -121,6 +112,7 @@ public class MenuPrincipal extends AppCompatActivity {
         simpleViewPager.setAdapter(adapter);
 
         simpleViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -173,8 +165,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 finish();
 
             }else{
-                if ((ip_serv.equals(getResources().getString(R.string.default_value_IP)))||
-                        (port_serv.equals(getResources().getString(R.string.default_value_port)))){
+                if ((ip_serv.equals(getResources().getString(R.string.default_value_IP)))||(port_serv.equals(getResources().getString(R.string.default_value_port)))){
                     Log.d(LOGIN_TAG, "No hai configuración de servidor previa");
                     Intent intent = new Intent(this,ConfiguracionServidor.class);
                     startActivityForResult(intent, REQUEST_CONFIG_SERV);
@@ -210,23 +201,19 @@ public class MenuPrincipal extends AppCompatActivity {
     /* Se lanza cuando hay un usuario previamente logueado */
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            // Capturamos la info de la cuenta de google
+            /* Capturamos la informacion de la cuenta de google */
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             nombre = account.getDisplayName();
             email = account.getEmail();
             photo_url = account.getPhotoUrl().toString();
             token = account.getIdToken();
-
-            /* Ejemplo de petición http al servidor, no tiene porque ir aqui*/
-            /*HttpsRequestAsyncTask task = new HttpsRequestAsyncTask(this, new HttpsRequestResult() {
-                @Override
-                public void processFinish(String result) {
-                }
-            });
-            task.execute(account.getIdToken());*/
+            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.key_token_id), token);
+            editor.apply();
 
         } catch (ApiException e) {
-            Log.w(LOGIN_TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.d(LOGIN_TAG, "signInResult:failed code=" + e.getStatusCode());
         }
     }
 
@@ -283,7 +270,7 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     /* Se lanza cuando se pulsa el botón de la barra de navegación.
-     * En ella se establecen la imformación del usuario logueado  */
+     * En ella se establecen la información del usuario logueado  */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
@@ -297,17 +284,20 @@ public class MenuPrincipal extends AppCompatActivity {
                 simpleViewPager.setCurrentItem(0);
                 return true;
             case R.id.refresh:
-                Toast.makeText(getApplicationContext(),"Refrescar información del fragmento "+simpleViewPager.getCurrentItem() , Toast.LENGTH_LONG).show();
+                adapter.notifyDataSetChanged();
                 return true;
             case android.R.id.home:
                 iniciarNav();
+                return true;
+            case R.id.realidad_aumentada:
+                iniciarRealidadAumentada();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    /* Tratamiento de las respuestas recibidad de las actividades lanzadas */
+    /* Tratamiento de las respuestas recibidas de las actividades lanzadas */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -374,4 +364,8 @@ public class MenuPrincipal extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
+
+    public void iniciarRealidadAumentada(){
+        Toast.makeText(this," Se inicia la Realidad Aumentada", Toast.LENGTH_LONG).show();
+    }
 }

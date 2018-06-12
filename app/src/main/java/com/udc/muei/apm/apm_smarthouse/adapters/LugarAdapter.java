@@ -1,12 +1,10 @@
 package com.udc.muei.apm.apm_smarthouse.adapters;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,33 +19,29 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by José Manuel González on 15/03/2018.
+ *
+ * REVISADA: José Manuel González on 10/06/2018.
  */
 
 public class LugarAdapter extends ArrayAdapter<Lugar> {
 
     private LugarListClicksListeners lugarListClicksListeners = null;
     private ArrayList<Lugar> dataSet;
-    Context mContext;
-
 
     private static class ViewHolder {
         CircleImageView image_view;
         TextView button_row;
     }
 
-
     public LugarAdapter(ArrayList<Lugar> data, Context context, LugarListClicksListeners listener) {
         super(context, R.layout.lugar_adapter_layout, data);
         this.dataSet = data;
-        this.mContext=context;
         this.lugarListClicksListeners = listener;
     }
-
 
     public Lugar getItem(int position){
         return dataSet.get(position);
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -60,8 +54,6 @@ public class LugarAdapter extends ArrayAdapter<Lugar> {
             convertView = inflater.inflate(R.layout.lugar_adapter_layout, parent, false);
 
             viewHolder.button_row = convertView.findViewById(R.id.lugar_text_adapter);
-            //viewHolder.button_row.setBackgroundColor(ContextCompat.getColor(convertView.getContext(), R.color.colorPrimary));
-            //viewHolder.button_row.setTextColor(ContextCompat.getColor(convertView.getContext(), R.color.white));
             viewHolder.button_row.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -69,7 +61,6 @@ public class LugarAdapter extends ArrayAdapter<Lugar> {
                         lugarListClicksListeners.onButtonLugaresClick((Integer) v.getTag());
                 }
             });
-
 
             convertView.setTag(viewHolder);
         } else {

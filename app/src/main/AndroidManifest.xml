@@ -89,6 +89,11 @@
             android:exported="true" />
 
         <receiver
+            android:name=".broadcastReceivers.NotificationLucesReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
             android:name=".broadcastReceivers.NotificationWifiReceiver"
             android:enabled="true"
             android:exported="true" />

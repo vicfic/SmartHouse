@@ -13,5 +13,10 @@
 
     <color name="indicador_rojo">#f70800</color>
     <color name="ondicador_verde">#60ff3c</color>
+
+
+    <color name="indicador_gris_suave">#757575</color>
+    <color name="indicador_verde_suave">#4CAF50</color>
+    <color name="indicador_rojo_suave">#F44336</color>
 </resources>
 
