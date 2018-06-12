@@ -31,8 +31,9 @@
         <activity android:name=".activities.MenuPrincipal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.ARTestCompany.ARforSmartHouse" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.DispositivosLugar" />
@@ -41,7 +42,7 @@
             android:theme="@style/NoBarTheme" />
         <activity
             android:name=".activities.GoogleLogin"
-            android:theme="@style/NoBarTheme" />
+            android:theme="@style/NoBarTheme"></activity>
         <activity android:name=".activities.Luces" />
 
         <service android:name=".Services.BoundService" />
@@ -56,8 +57,7 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".Services.ComprobacionLocalizacion"/>
+        <service android:name=".Services.ComprobacionLocalizacion" />
 
 
         <service

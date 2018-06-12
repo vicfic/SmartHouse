@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,7 +14,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -34,11 +34,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.udc.muei.apm.apm_smarthouse.R;
 import com.udc.muei.apm.apm_smarthouse.adapters.PagerAdapter;
-import com.udc.muei.apm.apm_smarthouse.fragments.Favoritos;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-
 
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -57,7 +54,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
     //Info de cuanta logueada
-    private String nombre ;
+    private String nombre;
     private String email;
     private String photo_url;
     private String token;
@@ -68,6 +65,7 @@ public class MenuPrincipal extends AppCompatActivity {
     TabLayout tabLayout;
 
     PagerAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +99,8 @@ public class MenuPrincipal extends AppCompatActivity {
 
         adapter = new PagerAdapter(getSupportFragmentManager(), this);
 
-        for(int i=0; i<adapter.getNombresFragmentos().size();i++){
-            if (i==0)
+        for (int i = 0; i < adapter.getNombresFragmentos().size(); i++) {
+            if (i == 0)
                 toolbar.setTitle(adapter.getNombresFragmentos().get(i));
             TabLayout.Tab tab = tabLayout.newTab();
             tab.setText(adapter.getNombresFragmentos().get(i));
@@ -150,27 +148,27 @@ public class MenuPrincipal extends AppCompatActivity {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
         String ip_serv = sharedPref.getString(getString(R.string.key_shared_IP), getResources().getString(R.string.default_value_IP));
         String port_serv = sharedPref.getString(getString(R.string.key_shared_port), getResources().getString(R.string.default_value_port));
-        Boolean eula_aceptada = sharedPref.getBoolean(getString(R.string.key_eula_accepted),false);
-        Boolean eula_editada = sharedPref.getBoolean(getString(R.string.key_eula_edited),false);
-        if((!eula_aceptada)&&(!eula_editada)) {
+        Boolean eula_aceptada = sharedPref.getBoolean(getString(R.string.key_eula_accepted), false);
+        Boolean eula_editada = sharedPref.getBoolean(getString(R.string.key_eula_edited), false);
+        if ((!eula_aceptada) && (!eula_editada)) {
             Log.d(LOGIN_TAG, "No hai eula aceptada");
             Intent intent = new Intent(this, Eula.class);
             startActivity(intent);
-        }else{
+        } else {
 
-            if ((eula_editada)&&(!eula_aceptada)){
+            if ((eula_editada) && (!eula_aceptada)) {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean(getString(R.string.key_eula_edited), false);
                 editor.commit();
                 finish();
 
-            }else{
-                if ((ip_serv.equals(getResources().getString(R.string.default_value_IP)))||(port_serv.equals(getResources().getString(R.string.default_value_port)))){
+            } else {
+                if ((ip_serv.equals(getResources().getString(R.string.default_value_IP))) || (port_serv.equals(getResources().getString(R.string.default_value_port)))) {
                     Log.d(LOGIN_TAG, "No hai configuración de servidor previa");
-                    Intent intent = new Intent(this,ConfiguracionServidor.class);
+                    Intent intent = new Intent(this, ConfiguracionServidor.class);
                     startActivityForResult(intent, REQUEST_CONFIG_SERV);
-                }else{
-                    Log.d(LOGIN_TAG, "Configuración Servidor:\n\t-IP: "+ip_serv+"\n\t-Puerto: "+port_serv);
+                } else {
+                    Log.d(LOGIN_TAG, "Configuración Servidor:\n\t-IP: " + ip_serv + "\n\t-Puerto: " + port_serv);
                     /* Comprobación de usuario logueado */
                     mGoogleSignInClient.silentSignIn()
                             .addOnFailureListener(this, new OnFailureListener() {
@@ -251,7 +249,7 @@ public class MenuPrincipal extends AppCompatActivity {
                                 return true;
                             case R.id.item_navigation_config_serv:
                                 // Opción de configuración del servidor
-                                Intent intent = new Intent(navigationView.getContext(),ConfiguracionServidor.class);
+                                Intent intent = new Intent(navigationView.getContext(), ConfiguracionServidor.class);
                                 startActivityForResult(intent, REQUEST_CONFIG_SERV);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
@@ -284,7 +282,7 @@ public class MenuPrincipal extends AppCompatActivity {
     /* Se lanza cuando se pulsa una de las opciones de la toolbar (nav, update, fav) */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.favorite_heart:
                 simpleViewPager.setCurrentItem(0);
                 return true;
@@ -306,12 +304,12 @@ public class MenuPrincipal extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CONFIG_SERV){
+        if (requestCode == REQUEST_CONFIG_SERV) {
             if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(getApplicationContext(), getString(R.string.new_config_serv), Toast.LENGTH_SHORT).show();
             }
-        }else if (requestCode == REQUEST_LOGIN){
-            if (resultCode == Activity.RESULT_OK){
+        } else if (requestCode == REQUEST_LOGIN) {
+            if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(getApplicationContext(), getString(R.string.login_ok), Toast.LENGTH_SHORT).show();
             }
         }
@@ -337,7 +335,7 @@ public class MenuPrincipal extends AppCompatActivity {
                 });
     }
 
-    private  void resetearConfigServ(){
+    private void resetearConfigServ() {
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.key_for_shared_preferences), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(getString(R.string.key_shared_IP), getString(R.string.default_value_IP));
@@ -346,7 +344,7 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
     /* Actualización del UI en función del usuario conectado*/
-    private void iniciarNav(){
+    private void iniciarNav() {
         // Se establece el nombre del usuario logueado
         TextView name_signin = findViewById(R.id.name_signin);
         if (nombre != null)
@@ -354,12 +352,12 @@ public class MenuPrincipal extends AppCompatActivity {
 
         // Se establece el email del usuario logueado
         TextView email_signin = findViewById(R.id.email_signin);
-        if (email!= null)
+        if (email != null)
             email_signin.setText(email);
 
         // Se carga la imagen del usuario logueado
         CircleImageView imageViewPerson = findViewById(R.id.login_image);
-        if (photo_url!=null) {
+        if (photo_url != null) {
             Glide.with(getApplicationContext()).load(photo_url)
                     .thumbnail(0.5f)
                     .crossFade()
@@ -370,7 +368,8 @@ public class MenuPrincipal extends AppCompatActivity {
     }
 
 
-    public void iniciarRealidadAumentada(){
-        Toast.makeText(this," Se inicia la Realidad Aumentada", Toast.LENGTH_LONG).show();
+    public void iniciarRealidadAumentada() {
+        Toast.makeText(this, " Se inicia la Realidad Aumentada", Toast.LENGTH_LONG).show();
+        startActivity(getPackageManager().getLaunchIntentForPackage("com.ARTestCompany.ARforSmartHouse"));
     }
 }
