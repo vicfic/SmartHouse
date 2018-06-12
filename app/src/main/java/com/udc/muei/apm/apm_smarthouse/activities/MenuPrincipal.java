@@ -244,6 +244,11 @@ public class MenuPrincipal extends AppCompatActivity {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 simpleViewPager.setCurrentItem(2);
                                 return true;
+                            case R.id.item_realidad_aumentada:
+                                // Cargar realidad aumentada
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                iniciarRealidadAumentada();
+                                return true;
                             case R.id.item_navigation_config_serv:
                                 // Opción de configuración del servidor
                                 Intent intent = new Intent(navigationView.getContext(),ConfiguracionServidor.class);

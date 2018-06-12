@@ -25,6 +25,11 @@
             android:checkable="false"
             android:icon="@drawable/ic_all_inclusive_white_24dp"
             android:title="@string/nav_rutinas" />
+        <item
+            android:id="@+id/item_realidad_aumentada"
+            android:checkable="false"
+            android:icon="@drawable/baseline_remove_red_eye_white_24"
+            android:title="@string/nav_realidad_aumentada" />
     </group>
 
     <item android:title="@string/nav_header_account">
