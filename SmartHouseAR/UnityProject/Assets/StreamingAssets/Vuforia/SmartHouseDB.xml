@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="radiador" size="50.000000 42.223949" />
+    <ImageTarget name="tarjetaDonante" size="1024.000000 653.599976" />
+  </Tracking>
+</QCARConfig>

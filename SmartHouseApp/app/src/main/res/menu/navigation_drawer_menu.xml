@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_navigation_usuarios"
+            android:checkable="false"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="@string/nav_usuarios" />
+        <item
+            android:id="@+id/item_navigation_favoritos"
+            android:checkable="false"
+            android:icon="@drawable/ic_action_toggle_star"
+            android:title="@string/nav_favoritos" />
+        <item
+            android:id="@+id/item_navigation_lugares"
+            android:checkable="false"
+            android:icon="@drawable/ic_location_on_white_24dp"
+            android:title="@string/nav_lugares" />
+        <item
+            android:id="@+id/item_navigation_rutinas"
+            android:checkable="false"
+            android:icon="@drawable/ic_all_inclusive_white_24dp"
+            android:title="@string/nav_rutinas" />
+        <item
+            android:id="@+id/item_realidad_aumentada"
+            android:checkable="false"
+            android:icon="@drawable/baseline_remove_red_eye_white_24"
+            android:title="@string/nav_realidad_aumentada" />
+    </group>
+
+    <item android:title="@string/nav_header_account">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/item_navigation_config_serv"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_settings_black_24dp"
+                    android:title="@string/nav_config_serv" />
+                <item
+                    android:id="@+id/item_navigation_logout"
+                    android:checkable="false"
+                    android:icon="@drawable/ic_power_settings_new_black_24dp"
+                    android:title="@string/nav_logout" />
+            </group>
+        </menu>
+    </item>
+</menu>
