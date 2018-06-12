@@ -369,7 +369,11 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
     public void iniciarRealidadAumentada() {
-        Toast.makeText(this, " Se inicia la Realidad Aumentada", Toast.LENGTH_LONG).show();
+
+        try{
         startActivity(getPackageManager().getLaunchIntentForPackage("com.ARTestCompany.ARforSmartHouse"));
+        }catch (NullPointerException e){
+            Toast.makeText(this, "Necesita instalar la APP de Realidad Aumentada", Toast.LENGTH_LONG).show();
+        }
     }
 }
