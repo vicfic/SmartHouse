@@ -30,13 +30,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 #Latencia por defecto para simular las peticiones desde la APP Android
-LATENCY_TIME = 1500 #Latencia en milisegundos
+LATENCY_TIME = 300 #Latencia en milisegundos
 
 INSTALLED_APPS = [
     'SmartHouse.apps.SmarthouseConfig',
-    #'social_django',
     'djangosecure',
     'sslserver',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,9 +60,6 @@ ROOT_URLCONF = 'APM_Server.urls'
 SECURE_SSL_REDIRECT = True
 SLOWDOWN = 3000
 
-SOCIAL_AUTH_FACEBOOK_KEY = '367078060476983'
-SOCIAL_AUTH_FACEBOOK_SECRET = '3f6f7363c1fed1a4d34fd8f965b174df'
-
 
 TEMPLATES = [
     {
@@ -75,28 +72,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social_django.context_processors.backends',
-                #'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'APM_Server.wsgi.application'
-
-
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',  # <--- este
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
 
 
 # Database
@@ -133,25 +114,6 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
-
-#SOCIAL_AUTH_URL_NAMESPACE ='social'
-
-#SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE =True
-#SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE =[
-#    'https://www.googleapis.com/auth/userinfo.email',
-#    'https://www.googleapis.com/auth/userinfo.profile'
-#]
-
-
-#SOCIAL_AUTH_GOOGLE_PLUS_IGNORE_DEFAULT_SCOPE = True
-#SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
-#        'https://www.googleapis.com/auth/plus.login',
-#        'https://www.googleapis.com/auth/userinfo.email',
-#        'https://www.googleapis.com/auth/userinfo.profile'
-#        ]
-
-#LOGIN_URL = '/account/login/'
-
 
 #SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='826023797512-h5fbll149nggnr5gf561rjkj7ok8kjk9.apps.googleusercontent.com'  #Paste CLient Key
 #SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'XaxwcJx_FaGmjGcNG1BcOG2x' #Paste Secret Key

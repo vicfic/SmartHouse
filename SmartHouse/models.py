@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-"""
+
 class Usuario(models.Model):
     Id_social = models.IntegerField(default=0)
     Nombre = models.CharField(max_length=200)
@@ -30,7 +30,7 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
-"""
+
 #hechas por Gabriel
 
 
@@ -39,20 +39,16 @@ class Propiedades(models.Model):
     nombre = models.CharField(max_length=200)
     valor = models.CharField(max_length=200)
 
-class Rutinas(models.Model):
-    nombre = models.CharField(max_length=200)
+
 
 class Usuarios(models.Model):
+    idGoogle = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    foto = models.CharField(max_length=400)
     nombre = models.CharField(max_length=200)
+    root = models.BooleanField(default= False)
 
-class RutinasUsuarios(models.Model):
-    usuarioId = models.ForeignKey(
-        Usuarios,
-        on_delete=models.CASCADE)
-    rutinaId = models.ForeignKey(
-        Rutinas,
-        on_delete=models.CASCADE)
-    activada = models.BooleanField(default = False)
+
 
 class Roles(models.Model):
     nombre = models.CharField(max_length=200)
@@ -64,22 +60,26 @@ class RolesUsuarios(models.Model):
     rolId = models.ForeignKey(
         Roles,
         on_delete=models.CASCADE)
-    activado = models.BooleanField(default = False)
+    activado = models.IntegerField(default = 0)
 
 class Lugares(models.Model):
     nombre = models.CharField(max_length=200)
+    url_photo = models.CharField(max_length=400)
 
 class TipoDispositivo(models.Model):
     nombre = models.CharField(max_length=200)
 
 class Dispositivos(models.Model):
     nombre = models.CharField(max_length=200)
-    activado = models.BooleanField(default = False)
+    activado = models.IntegerField(default = 0)
     lugarId = models.ForeignKey(
         Lugares,
         on_delete=models.CASCADE)
     tipoId = models.ForeignKey(
         TipoDispositivo,
+        on_delete=models.CASCADE)
+    grupoPermisos = models.ForeignKey(
+        Roles,
         on_delete=models.CASCADE)
 
 class Favoritos(models.Model):
@@ -89,3 +89,27 @@ class Favoritos(models.Model):
     dispositivoId = models.ForeignKey(
         Dispositivos,
         on_delete=models.CASCADE)
+
+class Rutinas(models.Model):
+    nombre = models.CharField(max_length=200)
+    dispositivoId = models.ForeignKey(
+        Dispositivos,
+        on_delete=models.CASCADE)
+
+class RutinasUsuarios(models.Model):
+    usuarioId = models.ForeignKey(
+        Usuarios,
+        on_delete=models.CASCADE)
+    rutinaId = models.ForeignKey(
+        Rutinas,
+        on_delete=models.CASCADE)
+    activada = models.BooleanField(default = False)
+
+class Beacons(models.Model):
+    uuid = models.CharField(max_length=200)
+    grupoId = models.CharField(max_length=200)
+    beaconId =models.CharField(max_length=200)
+    lugarId = models.ForeignKey(
+        Lugares,
+        on_delete=models.CASCADE)
+    rango = models.IntegerField()
