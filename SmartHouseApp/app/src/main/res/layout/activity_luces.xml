@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.udc.muei.apm.apm_smarthouse.activities.Luces">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/gradient_login_2">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/luces_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/gradient_6"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ToolbarTheme" />
+
+    <ListView
+        android:id="@+id/list_beacons"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/stop_service"
+        android:layout_height="match_parent"
+       ></ListView>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

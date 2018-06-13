@@ -1,0 +1,207 @@
+<resources>
+    <string name="app_name">APM-SmartHouse</string>
+
+    <!--- Login Google -->
+    <string name="login_google_titulo">SmartHouse</string>
+    <string name="texto_login_google_introduccion">Para que la aplicación SmartHouse pueda funcionar correctamente tienes que iniciar sesión con una cuenta de Google</string>
+
+    <!-- Configuracion servidor -->
+    <string name="configuracion_servidor_titulo">SmartHouse</string>
+    <string name="texto_configuracion_servidor">Es necesario que introduczas la dirección web y el puerto de tu servidor SmartHouse para que la aplicación se pueda comunicar con el sistema</string>
+    <string name="configuracion_servidor_subtitulo">Configuración de Servidor</string>
+
+    <!--- Actividad Menu Principal -->
+    <string name="toolbar_menu_principal_name">Menú Principal</string>
+    <string name="action_favorite">Favoritos</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_realiddAumentada">Realidad Aumentada</string>
+    <string name="action_refresh">Actualizar</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="gps_text">GPS</string>
+    <string name="nav_realidad_aumentada">Realidad Aumentada</string>
+
+
+    <!--- Actividad Rutinas -->
+    <string name="toolbar_routine_name">Rutinas</string>
+    <string-array name="context_menu_routine_list">
+        <item>Encender</item>
+        <item>Apagar</item>
+        <item>Configurar</item>
+    </string-array>
+
+
+    <!--- Actividad Permisos -->
+    <string name="toolbar_permisos_name">Permisos</string>
+    <string name="toolbar_permisos_name_error">Error Permisos</string>
+
+    <!-- Actividad Usuarios -->
+    <string name="toolbar_usuarios_name">Usuarios</string>
+
+    <!-- ActividadLogin -->
+    <string name="usuario_o_email">Usuario o Email</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar">INICIAR</string>
+    <string name="iniciar_con_google">INICIAR CON GOOGLE</string>
+    <string name="iniciar_con_twitter">INICIAR CON TWITTER</string>
+    <string name="iniciar_con_facebook">INICIAR CON FACEBOOK</string>
+    <string name="icono_de_boton">icono de boton</string>
+
+    <!-- Actividad Favoritos -->
+    <string name="toolbar_favoritos_name">Favoritos</string>
+
+    <!-- Actividad Lugares -->
+    <string name="toolbar_lugares_name">Lugares</string>
+
+    <!-- Actividad Dispositivos Lugar -->
+    <string name="toolbar_dispositivos_lugar_name">Dispositivos</string>
+
+    <!-- Actividad Configuración Servidor -->
+    <string name="toolbar_configuracion_servidor_name">Configuración Servidor</string>
+    <string name="direccion_ip">Dirección Servidor</string>
+    <string name="puerto_servidor">Puerto</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Atrás</string>
+
+    <!-- Contenido de la barra de navegación -->
+    <string name="nav_config_serv">Configuración de Servidor</string>
+    <string name="nav_favoritos">Favoritos</string>
+    <string name="nav_usuarios">Usuarios</string>
+    <string name="nav_rutinas">Rutinas</string>
+    <string name="nav_lugares">Lugares</string>
+    <string name="nav_header_account">Opciones de Configuración</string>
+    <string name="nav_logout">Desconectarse</string>
+
+    <!-- Mensaje al hacer logout (Toast) -->
+    <string name="logout_toast">Desconectado</string>
+
+    <!-- Mensaje al guardar nueva configuración de servidor (Toast)-->
+    <string name="new_config_serv">Configuración guardada</string>
+
+    <!-- Mensaje al hacer login (Toast) -->
+    <string name="login_ok">Bienvenido</string>
+
+    <!-- CLAVES SHAREDPREFERENCES-->
+    <!-- Clave para las preferencias compartidas -->
+    <string name="key_for_shared_preferences">key_for_shared_preferences</string>
+    <!-- Clave para la IP del servidor -->
+    <string name="key_shared_IP">key_shared_ip</string>
+    <!-- Clave para el puerto del servidor -->
+    <string name="key_shared_port">key_shared_port</string>
+    <!-- Clave para la rutina de calefaccion -->
+    <string name="key_shared_rutina_calefaccion">key_shared_rutina_calefaccion</string>
+    <!-- Clave para eula aceptado -->
+    <string name="key_eula_accepted">key_eula_accepted</string>
+    <!-- Clave para eula aceptado -->
+    <string name="key_eula_edited">key_eula_edited</string>
+    <!-- Clave para ID usuario en la BD Django -->
+    <string name="key_bd_django">usuario_id</string>
+    <!-- Clave para el token del usuario logueado -->
+    <string name="key_token_id">key_token_id</string>
+
+
+    <!-- Valor por defecto si no está guardada ninguna IP-->
+    <string name="default_value_IP"></string>
+    <string name="default_value_port"></string>
+
+    <string name="nombre_frag_lugares">Lugares</string>
+    <string name="nombre_frag_favoritos">Favoritos</string>
+    <string name="nombre_frag_rutinas">Rutinas</string>
+
+    <string name="server_client_id">804708077121-jlt5no06s0e33r1fp732ei8i4k4st5d1.apps.googleusercontent.com</string>
+
+
+    <!-- Actividad rutina luces -->
+    <string name="titulo_rutina_luces">Rutina Luces</string>
+    <string name="rutina_luces_activada">Rutina Luces Activada</string>
+    <string name="rutina_luces_desactivada">Rutina Luces Desactivada</string>
+        <string name="auto_luces">Encender Luces Automáticamente</string>
+
+
+    <!-- Actividad rutina calefaccion -->
+    <string name="titulo_rutina_calefaccion">Rutina Calefacción</string>
+    <string name="rutina_calefaccion_activada">Rutina Calefacción Activada</string>
+    <string name="rutina_calefaccion_desactivada">Rutina Calefacción Desactivada</string>
+
+    <string name="auto_calefaccion">Encender Calefacción Automáticamente</string>
+    <string name="alcance_calefaccion">Alcance:</string>
+    <string name="magnitud_alcance_calefaccion">metros.</string>
+    <string name="hint_alcance_calefaccion">radio en</string>
+    <string name="error_max_value_radius">Error. El valor máximo del alcance (en metros) es</string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="geofence_transition_dwell">Dwell</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="button_notification_YES">Si</string>
+    <string name="button_notification_NO">No</string>
+
+    <string name="button_notification_encender">Encender</string>
+    <string name="button_notification_apagar">Apagar</string>
+
+    <!-- Transition type msg strings -->
+    <string name="geofence_transition_entered_msg">Acercándose a casa.</string>
+    <string name="geofence_transition_exited_msg">Alejándose de casa.</string>
+    <string name="geofence_transition_dwell_msg">Alrededor de casa.</string>
+    <string name="unknown_geofence_transition_msg">Transición desconocida.</string>
+
+    <string name="title_notification_auto_ON_calefaccion">Calefacción encendida automáticamente.</string>
+    <string name="msg_notification_auto_ON_calefaccion">Se ha enviado una petición al sistema SmartHouse para encender la calefacción automáticamente.</string>
+
+    <string name="title_notification_auto_OFF_calefaccion">Calefacción apagada automáticamente.</string>
+    <string name="msg_notification_auto_OFF_calefaccion">Se ha enviado una petición al sistema SmartHouse para apagar la calefacción automáticamente.</string>
+
+    <string name="title_notification_ON_calefaccion">Calefacción encendida.</string>
+    <string name="msg_notification_ON_calefaccion">Se ha enviado una petición al sistema SmartHouse para encender la calefacción.</string>
+
+    <string name="title_notification_OFF_calefaccion">Calefacción apagada.</string>
+    <string name="msg_notification_OFF_calefaccion">Se ha enviado una petición al sistema SmartHouse para apagar la calefacción.</string>
+
+    <string name="geofence_transition_notification_text_ON">¿Desea encender la calefacción?</string>
+    <string name="geofence_transition_notification_text_OFF">¿Desea apagar la calefacción?</string>
+
+    <string name="lights_transition_notification_text">¿Desea apagar o encender luces?</string>
+
+    <string name="lights_transition_notification_text_ON">¿Desea encender luces?</string>
+    <string name="lights_transition_notification_text_OFF">¿Desea apagar las luces?</string>
+
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+</string>
+
+    <!-- Error strings -->
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+</string>
+
+    <string name="insufficient_permissions">Insufficient permissions.</string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permiso denegado, pero es esencial para el correcto
+        funcionamiento de la funcionalidad</string>
+    <string name="settings">Ajustes</string>
+
+    <string name="casa">Casa</string>
+
+
+    <!-- Strings eula -->
+    <string name="cancel_eula">Rechazar</string>
+    <string name="agree_eula">Aceptar</string>
+    <string name="eula_subtitulo">Términos y condiciones</string>
+    <string name="title_notification_auto_ON_wifi">Rutina Wifi</string>
+    <string name="msg_notification_auto_ON_wifi">Se ha enviado una petición al sistema SmartHouse para apagar las luces</string>
+    <string name="key_shared_rutina_wifi">key_shared_rutina_wifi</string>
+
+
+
+
+
+    <string name="info_refresh">Información actualizada</string>
+</resources>

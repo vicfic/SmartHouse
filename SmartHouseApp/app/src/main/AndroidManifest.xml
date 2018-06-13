@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.udc.muei.apm.apm_smarthouse">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.wifi" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/home"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activities.Permisos" />
+        <activity android:name=".activities.MenuPrincipal">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.ARTestCompany.ARforSmartHouse" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.DispositivosLugar" />
+        <activity
+            android:name=".activities.ConfiguracionServidor"
+            android:theme="@style/NoBarTheme" />
+        <activity
+            android:name=".activities.GoogleLogin"
+            android:theme="@style/NoBarTheme"></activity>
+        <activity android:name=".activities.Luces" />
+
+        <service android:name=".Services.BoundService" />
+
+        <activity android:name=".activities.ComprobacionGPS" />
+        <activity android:name=".activities.ComprobacionWifi" />
+
+        <receiver android:name=".broadcastReceivers.initMobileReceiver">
+            <intent-filter>
+                <action android:name="com.udc.muei.apm.apm_smarthouse.Services.COMPROBACION_LOCALIZACION_DESTROY" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".Services.ComprobacionLocalizacion" />
+
+
+        <service
+            android:name=".Services.GeofenceRegistrationService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".broadcastReceivers.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".broadcastReceivers.WifiBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyADhJ-uyG-DsJbIIX4f4C1zpRBSGc06V38" />
+
+        <receiver
+            android:name=".broadcastReceivers.NotificationCalefaccionReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".broadcastReceivers.NotificationLucesReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".broadcastReceivers.NotificationWifiReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".activities.Eula"></activity>
+
+    </application>
+
+</manifest>

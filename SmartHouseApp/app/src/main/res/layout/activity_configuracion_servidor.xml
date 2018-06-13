@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.udc.muei.apm.apm_smarthouse.activities.GoogleLogin"
+    android:background="@drawable/gradient_login_2">
+
+
+    <ImageView
+        android:id="@+id/icono_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="false"
+        app:srcCompat="@drawable/home" />
+
+    <ImageView
+        android:id="@+id/boton_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:adjustViewBounds="false"
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+
+    <TextView
+        android:id="@+id/titulo_config_serv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/icono_login"
+        android:text="@string/login_google_titulo"
+        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subtitulo_config_serv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo_config_serv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="54dp"
+        android:text="@string/configuracion_servidor_subtitulo"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/explicacion_cofing_serv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subtitulo_config_serv"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/texto_configuracion_servidor"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/edittext_ip_servidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#11000000"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:drawableLeft="@drawable/ic_http_white_24dp"
+        android:ems="10"
+        android:hint="@string/direccion_ip"
+        android:inputType="textUri"
+        android:layout_below="@+id/explicacion_cofing_serv"/>
+
+    <EditText
+        android:id="@+id/edittext_puerto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:drawableLeft="@drawable/ic_system_update_alt_white_24dp"
+        android:background="#11000000"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:ems="10"
+        android:hint="@string/puerto_servidor"
+        android:inputType="number"
+        android:layout_below="@+id/edittext_ip_servidor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_marginLeft="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_below="@id/edittext_puerto"
+        android:layout_marginBottom="42dp">
+
+        <Button
+            android:id="@+id/button_cancel_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="#ffffff"
+            android:background="@drawable/button_background"
+            android:textSize="18sp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="2"
+            android:theme="@style/MyButton" />
+
+        <Button
+            android:id="@+id/button_save_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/button_background2"
+            android:text="@string/save"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_weight="2"
+            android:theme="@style/MyButton"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
